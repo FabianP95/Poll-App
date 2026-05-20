@@ -1,0 +1,80 @@
+@use '../abstracts/variables' as *;
+
+@font-face {
+  font-family: 'Mulish';
+  src: url('/assets/fonts/Mulish/Mulish-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nerko One';
+  src: url('/assets/fonts/Nerko_One/NerkoOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nokora';
+  src: url('/assets/fonts/Nokora/Nokora-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: $font-display;
+  font-weight: 400;
+  line-height: 1.15;
+  color: $color-accent-orange;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin: 0;
+  font-family: $font-body;
+  line-height: 1.6;
+}
+
+.text-orange {
+  color: $color-accent-orange;
+}
+
+.text-muted {
+  color: $color-text-muted;
+}
+
+.text-white {
+  color: $color-text-primary;
+}
+
+.display-title {
+  font-family: $font-display;
+  color: $color-accent-orange;
+}
+
+.body-text {
+  font-family: $font-body;
+  color: $color-text-primary;
+}

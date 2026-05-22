@@ -1,0 +1,12 @@
+import { Component, input} from '@angular/core';
+
+
+@Component({
+  selector: 'app-app-header',
+  imports: [],
+  templateUrl: './app-header.html',
+  styleUrl: './app-header.scss',
+})
+export class AppHeader {
+   variant = input<'dark' | 'light'>('dark');
+}

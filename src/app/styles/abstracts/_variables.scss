@@ -1,20 +1,23 @@
 // Theme colors
-$color-bg-dark: #1f1528;
+$color-bg-dark: #35263A;
 $color-bg-card: #2e2238;
 $color-bg-card-light: #f3eef8;
 $color-bg-form: #e8e4ef;
 $color-bg-modal: #352942;
-$color-accent-orange: #e8a060;
+$color-accent-orange-light: #FFCFA1;
+$color-accent-orange: #FFB770;
 $color-accent-orange-dark: #c47a3a;
 $color-text-primary: #ffffff;
-$color-text-dark: #2a1f33;
+$color-text-dark: #221227;
 $color-text-muted: #b8a8c4;
+$color-text-orange: #FFB770;
 $color-border-subtle: rgba(255, 255, 255, 0.12);
 
 // Typography
 $font-display: 'Nerko One', cursive;
 $font-body: 'Mulish', sans-serif;
 $font-accent: 'Nokora', sans-serif;
+
 
 // Spacing
 $space-xs: 0.25rem;
@@ -28,7 +31,6 @@ $space-2xl: 4rem;
 $radius-sm: 0.5rem;
 $radius-md: 1rem;
 $radius-lg: 1.5rem;
-$radius-pill: 999px;
 
 // Breakpoints
 $bp-mobile: 767px;
@@ -38,3 +40,7 @@ $bp-desktop: 1024px;
 // Layout
 $container-max: 1440px;
 $header-height: 4.5rem;
+
+//
+$margin-wrapper: 0 auto;
+

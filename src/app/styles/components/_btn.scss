@@ -47,7 +47,7 @@
       width: 18px;
       margin-left: 10px;
       opacity: 1;
-      background-image: url('/assets/img/btn-img/check.svg'); // stays on filled icon
+      background-image: url('/assets/img/btn-img/check.svg');
     }
   }
 }
@@ -79,8 +79,8 @@
   }
 
   &:hover {
-  /*   background: $color-bg-dark;     
-    color: $color-text-light;  */      
+    background: $color-bg-tertiary-btn-hover;     
+       
   }
 }
 
@@ -110,7 +110,7 @@
   @include flex-center(row);
   padding: $space-xs $space-lg;
   border: none;
-  border-radius: $radius-lg;       // more rounded than secondary
+  border-radius: $radius-lg;       
   background: $color-accent-orange-light;
   color: $color-text-dark;
   font-family: $font-body;
@@ -123,7 +123,6 @@
     background: $color-accent-orange;
   }
 
-  // selected/active filter state
   &.is-active {
     background: $color-accent-orange;
     font-weight: 700;

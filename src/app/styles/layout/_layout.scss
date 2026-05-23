@@ -1,0 +1,6 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.content-wrapper{
+   @include container;
+}

@@ -29,3 +29,12 @@
   width: $container-max;
   margin: $margin-wrapper;
 }
+
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

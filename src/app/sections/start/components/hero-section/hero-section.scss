@@ -3,7 +3,6 @@
 @use '../../../../styles/abstracts/functions' as *;
 
 .hero {
-    @include container;
     display: grid;
     height: calc(90vh - 100px);
     max-height: 1600px;

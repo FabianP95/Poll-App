@@ -1,1 +1,11 @@
-<p>ending-soon-row works!</p>
+<div class="content-wrapper">
+    <h2>Your surveys</h2>
+    <section class="ending-soon">
+        <h3 class="ending-soon__title">Ending soon surveys</h3>
+        <div class="ending-soon__scroll">
+            @for (survey of surveys(); track survey.id) {
+            <app-survey-card [survey]="survey" variant="horizontal" />
+            }
+        </div>
+    </section>
+</div>

@@ -1,0 +1,20 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/functions' as *;
+
+
+.ending-soon {
+  @include flex-center();
+  padding-block: $space-lg;
+
+  &__title {
+    font-size: 1.75rem;
+  }
+
+  &__scroll {
+    @include flex-center(row);
+    overflow-x: auto;
+    padding-bottom: $space-sm;
+    @include hide-scrollbar;
+  }
+}

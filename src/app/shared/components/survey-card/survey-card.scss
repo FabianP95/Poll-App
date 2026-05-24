@@ -1,3 +1,6 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
 :host.survey-card--horizontal {
   flex: 0 0 min(85%, 18rem);
   max-width: 20rem;
@@ -9,7 +12,7 @@
 
 .survey-card {
   &__inner {
-    @include flex-col($space-sm);
+    @include flex-center();
     position: relative;
     min-height: 10rem;
     padding: $space-lg;
@@ -48,7 +51,7 @@
   }
 
   &__badge {
-    @include pill-badge($color-accent-orange, $color-text-dark);
+    
     align-self: flex-start;
     margin-top: auto;
   }
@@ -70,7 +73,7 @@
 }
 
 :host.survey-card--list .survey-card__inner {
-  @include card-base;
+  @include card-base();
   min-height: 8rem;
 
   .survey-card__category {

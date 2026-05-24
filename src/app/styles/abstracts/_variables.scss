@@ -1,25 +1,31 @@
 // Theme colors
 $color-bg-dark: #35263A;
+$color-bg-light: rgb(67, 50, 73);
+$color-bg-light-dropdown: rgb(73, 59, 77);
 $color-bg-card: #2e2238;
 $color-bg-card-light: #f3eef8;
 $color-bg-form: #e8e4ef;
 $color-bg-modal: #352942;
-$color-accent-orange-light: #FFCFA1;
-$color-accent-orange: #FFB770;
-$color-accent-orange-dark: #c47a3a;
+$color-accent-orange-light: rgb(255, 207, 161);
+$color-bg-orange-light: #FEE9D4;
+$color-accent-orange: rgb(238, 146, 54);
+$color-accent-orange-dark: rgb(196, 122, 58);
 $color-text-primary: #ffffff;
-$color-text-dark: #221227;
+$color-text-dark: rgb(34, 18, 39);
 $color-text-muted: #b8a8c4;
 $color-text-orange: #FFB770;
 $color-border-subtle: rgba(255, 255, 255, 0.12);
-$color-bg-tertiary-btn-hover:#5C4F61;
+$color-bg-tertiary-btn-hover: #5C4F61;
+$color-bg-draft: #FEE9D4;
+$color-bg-hover-options-dropdown: #F4E9FB;
+
 
 // Typography
 $font-display: 'Nerko One', cursive;
 $font-body: 'Mulish', sans-serif;
 $font-accent: 'Nokora', sans-serif;
 
-
+$color: rgb(238, 146, 54);
 // Spacing
 $space-xs: 0.25rem;
 $space-sm: 0.5rem;
@@ -44,4 +50,3 @@ $header-height: 4.5rem;
 
 //
 $margin-wrapper: 0 auto;
-

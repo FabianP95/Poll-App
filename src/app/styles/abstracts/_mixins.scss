@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use './functions' as *;
 
 @mixin mobile {
   @media (max-width: $bp-mobile) {
@@ -37,4 +38,165 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+@mixin truncate-text($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin pill-badge($bg, $color) {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-xs $space-md;
+  border-radius: 50%;
+  background: $bg;
+  color: $color;
+  font-family: $font-body;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@mixin dark-input {
+  @include container-rounded-top-right($radius: 20px);
+  width: 100%;
+  padding: $space-sm $space-md;
+  border: none;
+  background: #ffffff;
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: 0.95rem;
+
+  &:focus {
+    border: none;
+    background: $color-bg-orange-light;
+    outline: none;
+  }
+}
+
+@mixin card-base {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+}
+
+@mixin btn-primary($icon: '/assets/img/btn-img/add_circle.svg', $active-icon: '/assets/img/btn-img/check.svg') {
+  @include flex-center(row);
+  justify-content: center;
+  padding: $space-sm $space-lg;
+  border: none;
+  border-radius: $radius-sm;
+  background: $color-accent-orange-light;
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: rem(20);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, padding 0.2s ease;
+
+  >span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18px;
+    width: 0;
+    overflow: hidden;
+    margin-left: 0;
+    background-image: url($icon);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    transition: width 0.2s ease, margin-left 0.2s ease, opacity 0.2s ease;
+  }
+
+  &:hover {
+    background: $color-accent-orange;
+
+    >span {
+      width: 18px;
+      margin-left: 10px;
+      opacity: 1;
+    }
+  }
+
+  &.is-active>span {
+    width: 18px;
+    margin-left: 10px;
+    opacity: 1;
+    background-image: url($active-icon);
+  }
+}
+
+@mixin btn-secondary($icon: '') {
+  @include flex-center(row);
+  padding: $space-sm $space-lg;
+  border: none;
+  border-radius: $radius-sm;
+  background: rgba($color-accent-orange-light, 0.5);
+  color: $color-text-primary;
+  font-family: $font-body;
+  font-size: rem(16);
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  >span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(16);
+    height: rem(16);
+    background-image: url($icon);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: 10px;
+  }
+
+  &:hover {
+    background: rgba($color-accent-orange, 0.65);
+  }
+}
+
+@mixin container-rounded-top-right($color-bg: white, $radius: 20px) {
+  background-color: $color-bg;
+  border-radius: 5px $radius 5px 5px;
+}
+
+@mixin btn-tertiary($icon:'/assets/img/btn-img/add_circle.svg') {
+
+  @include flex-center(row);
+  gap: rem(8);
+  padding: $space-sm $space-lg;
+  border: none;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-text-dark;
+  font-family: $font-body;
+  font-size: rem(16);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  >span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(18);
+    height: rem(18);
+    background-image: url($icon);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &:hover {
+    background: $color-bg-tertiary-btn-hover;
+  }
+
 }

@@ -1,0 +1,91 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+@use '../../../styles/abstracts/functions' as *;
+
+.category-dropdown {
+  position: relative;
+
+  &__trigger {
+    @include flex-center(row);
+    padding: $space-sm;
+    gap: $space-sm;
+    border-radius: 5px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: $font-body;
+    font-size: rem(18);
+    font-weight: 600;
+    color: $color-text-primary;
+
+    .category-dropdown__arrow {
+      background-image: url('/assets/img/btn-img/arrow_drop_down.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      background-color: $color-bg-light-dropdown;
+
+      .category-dropdown__arrow {
+        background-image: url('/assets/img/btn-img/arrow_drop_down_orange.svg');
+      }
+    }
+
+    &.is-open {
+      background-color: $color-bg-light-dropdown;
+
+      .category-dropdown__arrow {
+        transform: rotate(180deg);
+        background-image: url('/assets/img/btn-img/arrow_drop_down_orange.svg') !important;
+        width: 18px;
+        height: 18px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: $color-bg-light-dropdown;
+      }
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    min-width: 180px;
+    background: $color-text-primary;
+    border-radius: $radius-sm ;
+    box-sizing: border-box;
+    padding: 5px;
+    overflow: hidden;
+    z-index: 10;
+  }
+
+  &__option {
+    width: fit-content;
+    padding: $space-sm ;
+    border-radius: 5px;
+    font-family: $font-body;
+    font-size: rem(16);
+    color: $color-text-dark;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: $color-bg-hover-options-dropdown;
+    }
+  }
+
+  &__choosen-option {
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: rem(16);
+    font-family: $font-body;
+    color: $color-accent-orange;
+  }
+}

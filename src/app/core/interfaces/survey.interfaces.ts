@@ -6,8 +6,6 @@ export interface Survey {
   description: string;
   category: string;
   endDate: Date | null;
-  status: SurveyStatus;
-  questions: Question[];
 }
 
 export interface Question {
@@ -19,9 +17,11 @@ export interface Question {
 
 export interface Answer {
   id: string;
-  label: string;
+  /* label: string; */
   text: string;
-  order: number;
+  /* order: number; */
+  letter:string; // check if necessary
+  votes:number // check if necessary
 }
 
 export interface VoteResult {

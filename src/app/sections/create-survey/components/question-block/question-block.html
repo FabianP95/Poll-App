@@ -1,0 +1,34 @@
+<fieldset class="question-block">
+  <div class="question-block__header">
+    <legend class="question-block__legend">{{ questionNumber() }}. Question</legend>
+    <button type="button" class="question-block__delete" aria-label="Delete question" (click)="deleteQuestion.emit()">
+    </button>
+  </div>
+
+  <input class="question-block__question-input" type="text" [value]="question().text"
+    placeholder="Which date would work best for you?" (input)="updateQuestionText($any($event.target).value)" />
+
+  <div class="question-block__answers-header">
+    <span class="question-block__answers-label">Answers</span>
+    <label class="question-block__multiple">
+      <input type="checkbox" [checked]="question().allowMultiple"
+        (change)="toggleMultiple($any($event.target).checked)" />
+      Allow multiple answers
+    </label>
+  </div>
+
+  @for (answer of question().answers; track answer.id; let i = $index) {
+  <div class="question-block__answer-row">
+    <span class="question-block__letter">{{ answer.letter }}.</span>
+    <input class="question-block__answer-input" type="text" [value]="answer.text" placeholder="Answer option"
+      (input)="updateAnswerText(i, $any($event.target).value)" />
+    <button type="button" class="question-block__delete" aria-label="Remove answer" (click)="removeAnswer(i)">
+    </button>
+  </div>
+  }
+
+  <button type="button" class="question-block__add-answer" (click)="addAnswer()">
+    Add answer
+    <span></span>
+  </button>
+</fieldset>

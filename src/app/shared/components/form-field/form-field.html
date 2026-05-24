@@ -1,0 +1,19 @@
+<div class="form-field">
+  <label class="form-field__label">
+    {{ label() }}
+    @if (optional()) {
+    <span class="form-field__optional">(optional)</span>
+    }
+  </label>
+  <div class="form-field__row">
+    @if (type() === 'textarea') {
+    <textarea class="form-field__control" [placeholder]="placeholder()" [(ngModel)]="value" rows="4"></textarea>
+    } @else {
+    <input class="form-field__control" type="text" [placeholder]="placeholder()" [(ngModel)]="value" />
+    }
+    @if (showDelete()) {
+    <button type="button" class="form-field__delete" aria-label="Clear field" (click)="onDelete()">
+    </button>
+    }
+  </div>
+</div>

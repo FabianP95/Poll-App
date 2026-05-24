@@ -2,6 +2,13 @@
 @use '../../../../styles/abstracts/mixins' as *;
 @use '../../../../styles/abstracts/functions' as *;
 
+.header-your-surveys {
+  @include flex-center();
+
+  >h2 {
+    font-size: rem(72)
+  }
+}
 
 .ending-soon {
   @include flex-center();

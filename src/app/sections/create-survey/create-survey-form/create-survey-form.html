@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <div class="create-form create-form__background">
+        <header class="create-form__header">
+            <span class="create-form__badge">Draft</span>
+            <div class="create-form__title">
+                <h2 class="create-form__title">Create new survey</h2>
+                <button (click)="cancelCreation()" type="button" class="create-form__cancel-btn">
+                    Cancel
+                    <span btn-secondary__img></span>
+                </button>
+            </div>
+        </header>
+        <form class="form" id="surveyForm" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+            <div class="form__layout">
+                <div>
+                    <app-form-field label="Survey name" [showDelete]="true" />
+                    <div class="form__row">
+                        <app-form-field label="Set end date" [optional]="true" [showDelete]="true" />
+                        <app-category-dropdown label="Choose category" />
+                    </div>
+                </div>
+
+                <app-form-field label="Describing text" [optional]="true" type="textarea" [showDelete]="true" />
+
+
+                @for (q of questions(); track q.id; let i = $index) {
+                <app-question-block [questionNumber]="i + 1" [question]="q" (questionChange)="updateQuestion(i, $event)"
+                    (deleteQuestion)="removeQuestion(i)" />
+                }
+
+                <button type="button" class="form__add-question" (click)="addQuestion()">
+                    Add next question
+                    <span></span>
+                </button>
+            </div>
+        </form>
+        <footer class="form__footer">
+            <button form="surveyForm" type="submit" class="form__publish">
+                Publish <span></span>
+            </button>
+        </footer>
+
+    </div>

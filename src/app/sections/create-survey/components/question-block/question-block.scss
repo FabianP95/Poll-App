@@ -1,0 +1,91 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/functions' as *;
+
+.question-block {
+  @include flex-center();
+  align-items: flex-start;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  &__header {
+    @include flex-center(row);
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__legend {
+    font-family: $font-body;
+    font-size: rem(18);
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__delete {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 15px;
+    background-image: url('/assets/img/btn-img/delete.svg');
+    background-size: 20px 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-accent-orange-light;
+      background-image: url('/assets/img/btn-img/delete-dark.svg');
+    }
+  }
+
+  &__question-input,
+  &__answer-input {
+    @include dark-input;
+  }
+
+  &__answers-header {
+    @include flex-center(row);
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__answers-label {
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &__multiple {
+    @include flex-center(row);
+    font-size: rem(16);
+    font-family: $font-body;
+    color: $color-text-primary;
+    cursor: pointer;
+  }
+
+  &__answer-row {
+    @include flex-center(row);
+  }
+
+  &__letter {
+    font-weight: 700;
+    color: $color-text-primary;
+    min-width: 1.5rem;
+  }
+
+  &__add-answer {
+    @include btn-tertiary();
+  }
+
+  &__add-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 2px solid $color-accent-orange;
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+}

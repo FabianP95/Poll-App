@@ -1,34 +1,35 @@
 <fieldset class="question-block">
   <div class="question-block__header">
     <legend class="question-block__legend">{{ questionNumber() }}. Question</legend>
-    <button type="button" class="question-block__delete" aria-label="Delete question" (click)="deleteQuestion.emit()">
+    <button type="button" class="question-block__delete" aria-label="Delete question" (click)="onDeleteQuestion()">
     </button>
   </div>
 
-  <input class="question-block__question-input" type="text" [value]="question().text"
-    placeholder="Which date would work best for you?" (input)="updateQuestionText($any($event.target).value)" />
+  <input class="question-block__question-input" type="text"  [value]="question().text" (input)="updateQuestionText(($event.target).value)"/>
 
   <div class="question-block__answers-header">
     <span class="question-block__answers-label">Answers</span>
     <label class="question-block__multiple">
-      <input type="checkbox" [checked]="question().allowMultiple"
-        (change)="toggleMultiple($any($event.target).checked)" />
+      <input type="checkbox" [checked]="question().allow_multiple_answers"
+        (change)="toggleMultiple(($event.target).checked)" />
       Allow multiple answers
     </label>
   </div>
 
-  @for (answer of question().answers; track answer.id; let i = $index) {
+  @for (answer of question().answers; track answer.letter; let i = $index) {
   <div class="question-block__answer-row">
     <span class="question-block__letter">{{ answer.letter }}.</span>
-    <input class="question-block__answer-input" type="text" [value]="answer.text" placeholder="Answer option"
-      (input)="updateAnswerText(i, $any($event.target).value)" />
+    <input class="question-block__answer-input" type="text" [value]="answer.text"
+      (input)="updateAnswerText(i, ($event.target).value)" />
     <button type="button" class="question-block__delete" aria-label="Remove answer" (click)="removeAnswer(i)">
     </button>
   </div>
   }
 
   <button type="button" class="question-block__add-answer" (click)="addAnswer()">
-    Add answer
-    <span></span>
+    <div class="btn-content">
+      <span>Add answer</span>
+      <span class="btn-icon"></span>
+    </div>
   </button>
 </fieldset>

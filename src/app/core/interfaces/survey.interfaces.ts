@@ -5,26 +5,31 @@ export interface Survey {
   title: string;
   description: string;
   category: string;
-  endDate: Date | null;
+  end_date: Date | null;
 }
 
 export interface Question {
   id: string;
+  survey_id: number;
   text: string;
-  allowMultiple: boolean;
+  allow_multiple_answers: boolean;
+  order:number;
   answers: Answer[];
 }
 
 export interface Answer {
-  id: string;
-  /* label: string; */
+  question_id: string,
   text: string;
-  /* order: number; */
-  letter:string; // check if necessary
-  votes:number // check if necessary
+  letter: string; 
+  votes: number // check if necessary
 }
 
 export interface VoteResult {
   label: string;
   percentage: number; // necessary?
+}
+
+export interface QuestionValidationResult {
+  isValid: boolean;
+  question: Question;
 }

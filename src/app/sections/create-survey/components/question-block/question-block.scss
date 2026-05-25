@@ -8,11 +8,13 @@
   border: none;
   padding: 0;
   margin: 0;
+  width: 90%;
 
   &__header {
     @include flex-center(row);
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 5px;
   }
 
   &__legend {
@@ -42,17 +44,24 @@
   &__question-input,
   &__answer-input {
     @include dark-input;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   &__answers-header {
     @include flex-center(row);
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
+    margin: 10px 0;
+
   }
 
   &__answers-label {
     font-weight: 600;
     color: $color-text-primary;
+    font-family: $font-body;
+    font-size: rem(18);
   }
 
   &__multiple {
@@ -61,15 +70,54 @@
     font-family: $font-body;
     color: $color-text-primary;
     cursor: pointer;
+    font-size: rem(16);
+    user-select: none;
+  }
+
+  &__multiple input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #f8f8f8;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__multiple input[type="checkbox"]:hover {
+    background: rgba(245, 166, 35, 0.6);
+  }
+
+  &__multiple input[type="checkbox"]:checked {
+    background: $color-accent-orange;
+    border-color: $color-accent-orange;
+  }
+
+  &__multiple input[type="checkbox"]:checked {
+    width: 18px;
+    height: 18px;
+    background-image: url('/assets/img/btn-img/check.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 11px;
+    border-color: $color-accent-orange;
   }
 
   &__answer-row {
     @include flex-center(row);
+    margin-bottom: 10px;
+    width: 100%;
+    gap: 5px;
   }
 
   &__letter {
     font-weight: 700;
+    font-size: rem(18);
     color: $color-text-primary;
+    font-family: $font-body;
     min-width: 1.5rem;
   }
 

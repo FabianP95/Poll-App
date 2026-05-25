@@ -168,7 +168,7 @@
   border-radius: 5px $radius 5px 5px;
 }
 
-@mixin btn-tertiary($icon:'/assets/img/btn-img/add_circle.svg') {
+@mixin btn-tertiary($icon: '/assets/img/btn-img/add_circle_white.svg') {
 
   @include flex-center(row);
   gap: rem(8);
@@ -176,23 +176,31 @@
   border: none;
   border-radius: $radius-sm;
   background: transparent;
-  color: $color-text-dark;
+  color: $color-text-primary;
   font-family: $font-body;
   font-size: rem(16);
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 
-  >span {
-    display: flex;
+  >.btn-content {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: rem(18);
-    height: rem(18);
-    background-image: url($icon);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    gap: rem(8);
+    border-bottom: 2px solid $color-text-primary;
+    padding-bottom: 2px;
+
+    >span.btn-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(18);
+      height: rem(18);
+      background-image: url($icon);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
   }
 
   &:hover {

@@ -12,7 +12,7 @@ export class FormFieldComponent {
   placeholder = input('');
   optional = input(false);
   showDelete = input(false);
-  type = input<'input' | 'textarea'>('input');
+  type = input<'input' | 'textarea' | 'date'>('input');
   value = model('');
 
   onDelete(): void {

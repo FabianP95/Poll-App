@@ -1,6 +1,7 @@
 // Theme colors
 $color-bg-dark: #35263A;
 $color-bg-light: rgb(67, 50, 73);
+$color-bg-light-hover: #4F4354;
 $color-bg-light-dropdown: rgb(73, 59, 77);
 $color-bg-card: #2e2238;
 $color-bg-card-light: #f3eef8;
@@ -18,14 +19,14 @@ $color-border-subtle: rgba(255, 255, 255, 0.12);
 $color-bg-tertiary-btn-hover: #5C4F61;
 $color-bg-draft: #FEE9D4;
 $color-bg-hover-options-dropdown: #F4E9FB;
-
+$toast-bg: rgb(252, 232, 213);
 
 // Typography
 $font-display: 'Nerko One', cursive;
 $font-body: 'Mulish', sans-serif;
 $font-accent: 'Nokora', sans-serif;
 
-$color: rgb(238, 146, 54);
+
 // Spacing
 $space-xs: 0.25rem;
 $space-sm: 0.5rem;
@@ -50,3 +51,6 @@ $header-height: 4.5rem;
 
 //
 $margin-wrapper: 0 auto;
+
+$toast-backdrop-blur: 4px;
+$toast-slide-duration: 0.5s;

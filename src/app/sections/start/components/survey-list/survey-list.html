@@ -1,1 +1,37 @@
-<p>survey-list works!</p>
+<section class="survey-list content-wrapper">
+  <div class="survey-list__toolbar">
+    <div class="survey-list__tabs">
+      <button
+        type="button"
+        class="btn-filter"
+        [class.btn-filter--active]="activeTab() === 'active'"
+        (click)="setTab('active')"
+      >
+        Active survey
+      </button>
+      <button
+        type="button"
+        class="btn-filter"
+        [class.btn-filter--active]="activeTab() === 'past'"
+        (click)="setTab('past')"
+      >
+        Past survey
+      </button>
+    </div>
+    <app-category-dropdown label="Sort by categories"></app-category-dropdown>
+  </div>
+
+  @if (filteredSurveys().length === 0) {
+    <p class="survey-list__empty">No surveys in this category</p>
+  } @else {
+    <div class="survey-list__grid">
+      @for (survey of filteredSurveys(); track survey.id) {
+        <app-survey-card
+          [survey]="survey"
+          variant="list"
+          [clickable]="activeTab() === 'active'"
+        />
+      }
+    </div>
+  }
+</section>

@@ -1,7 +1,7 @@
 import { Component, HostBinding, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Survey } from '../../../core/interfaces/survey.interfaces';
-/* import { formatEndLabel } from '../../../core/utils/survey.utils'; */
+import { formatEndLabel } from '../../../core/utils/survey.utils';
 
 @Component({
   selector: 'app-survey-card',
@@ -20,7 +20,6 @@ export class SurveyCardComponent {
   }
 
   endLabel(): string {
-    /* return formatEndLabel(this.survey().endDate); */
-    return "Placeholder"
+    return formatEndLabel(this.survey().end_date);
   }
 }

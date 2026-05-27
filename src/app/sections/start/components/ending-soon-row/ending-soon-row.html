@@ -2,10 +2,14 @@
     <h2>Your surveys</h2>
     <section class="ending-soon">
         <h3 class="ending-soon__title">Ending soon surveys</h3>
+        @if (surveys().length === 0) {
+        <p class="ending-soon__empty">No surveys ending soon</p>
+        } @else {
         <div class="ending-soon__scroll">
             @for (survey of surveys(); track survey.id) {
             <app-survey-card [survey]="survey" variant="horizontal" />
             }
         </div>
+        }
     </section>
 </div>

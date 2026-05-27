@@ -26,13 +26,10 @@ export class QuestionBlock {
   isValid = computed(() => this.checkQuestionValidity() && this.checkAnswerValidity());
 
   checkAnswerValidity() {
-
-
-    return this.question().answers.every(a => a.text.trim().length >= 0);
+    return this.question().answers.every((a) => a.text.trim().length > 0);
   }
 
   checkQuestionValidity() {
-    console.log(1);
     return this.question().text.trim().length >= 4 && this.question().text.trim().endsWith('?');
   }
 
@@ -70,16 +67,21 @@ export class QuestionBlock {
   }
 
   removeAnswer(index: number): void {
-    const q = this.question();
-    if (q.answers.length <= 2) return;
-    this.emit({
-      ...q,
-      answers: q.answers
-        .filter((_, i) => i !== index)
-        .map((a, i) => ({ ...a, letter: String.fromCharCode(65 + i) })),
-    });
-
+  const q = this.question();
+  
+  if (q.answers.length <= 2) {
+    this.emit({...q,
+      answers: q.answers.map((a, i) => 
+        i === index ? { ...a, text: '' } : a
+      ),
+    }); return;
   }
+  this.emit({...q,
+    answers: q.answers
+      .filter((_, i) => i !== index)
+      .map((a, i) => ({ ...a, letter: String.fromCharCode(65 + i) })),
+  });
+}
 
   toggleMultiple(checked: boolean): void {
     this.emit({ ...this.question(), allow_multiple_answers: checked });

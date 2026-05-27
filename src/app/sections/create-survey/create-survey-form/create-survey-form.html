@@ -13,19 +13,21 @@
         <form class="form" id="surveyForm">
             <div class="form__layout">
                 <div>
-                    <app-form-field label="Survey name" [showDelete]="true" [(value)]="surveyName"/>
+                    <app-form-field label="Survey name" [showDelete]="true" [(value)]="surveyName" />
                     <div class="form__row">
-                        <app-form-field type="date" label="Set end date" [optional]="true" [showDelete]="true" [(value)]="endDate"/>
-                        <app-category-dropdown label="Choose category" [(value)]="category"/>
+                        <app-form-field type="date" label="Set end date" [optional]="true" [showDelete]="true"
+                            [(value)]="endDate" />
+                        <app-category-dropdown label="Choose category" [(value)]="category" />
                     </div>
                 </div>
 
-                <app-form-field label="Describing text" [optional]="true" type="textarea" [showDelete]="true" [(value)]="description" />
+                <app-form-field label="Describing text" [optional]="true" type="textarea" [showDelete]="true"
+                    [(value)]="description" />
 
 
                 @for (q of questions(); track q.id; let i = $index) {
                 <app-question-block [questionNumber]="i + 1" [question]="q" (questionChange)="updateQuestion(i, $event)"
-                    (deleteQuestion)="removeQuestion(i)"/>
+                    (deleteQuestion)="removeQuestion(i)" />
                 }
 
                 <button type="button" class="form__add-question" (click)="addQuestion()">
@@ -34,6 +36,7 @@
                 </button>
             </div>
         </form>
+      
         <footer class="form__footer">
             <button form="surveyForm" type="submit" class="form__publish" (click)="onSubmit($event)">
                 Publish <span></span>

@@ -10,10 +10,12 @@ import { FormsModule } from '@angular/forms';
 export class CategoryDropdownComponent {
   label = input('');
   options = input<string[]>([
-    'Team activities',
+    'Team Activities',
     'Health & Wellness',
-    'Gaming',
-    'Workplace culture',
+    'Gaming & Entertainment',
+    'Education & Learning',
+    'Lifestyle & Preferences',
+    'Technology & Innovation',
   ]);
   value = model('');
 

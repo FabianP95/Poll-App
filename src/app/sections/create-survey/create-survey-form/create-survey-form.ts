@@ -1,4 +1,4 @@
-import { Component, inject, signal, output, viewChild, viewChildren } from '@angular/core';
+import { Component, inject, signal, output, viewChildren } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { QuestionBlock } from '../components/question-block/question-block';
@@ -7,6 +7,8 @@ import { CategoryDropdownComponent } from '../../../shared/components/category-d
 import { Question } from '../../../core/interfaces/survey.interfaces';
 import { Answer } from '../../../core/interfaces/survey.interfaces';
 import { Supabase } from '../../../supabase';
+import { FeedbackToastService } from '../../../shared/services/feedback-toast.service';
+
 
 function createEmptyQuestion(index: number): Question {
   return {
@@ -32,6 +34,8 @@ function createEmptyQuestion(index: number): Question {
 
 export class CreateSurveyForm {
   router = inject(Router);
+  feedbackToast = inject(FeedbackToastService);
+
   surveyName = signal('');
   description = signal('');
   endDate = signal('');
@@ -43,25 +47,63 @@ export class CreateSurveyForm {
   dbService = inject(Supabase)
 
 
-
+  /**
+   * Runs when the user clicks "Publish".
+   * First we validate the form, then we save to Supabase, then we show a toast.
+   */
   async onSubmit(event: Event) {
     event.preventDefault();
-    const titleValid = this.surveyName().trim().length >= 4;
-    const allQuestionsValid = this.questionBlocks().every(block => block.isValid());
 
+    const errorMessage = this.getPublishErrorMessage();
+    if (errorMessage) {
+      this.feedbackToast.showError(errorMessage);
+      return;
+    }
 
     const survey_data = await this.createSurvey();
+    if (!survey_data) {
+      this.feedbackToast.showError('Could not save survey. Please try again.');
+      return;
+    }
 
     await this.createQuestions(survey_data.id);
 
-
-    console.log('magic happen');
-
-
-    if (!titleValid || !allQuestionsValid) return;
-
+    this.feedbackToast.showSuccess('Your survey is now published');
 
   }
+
+  /**
+   * Checks the form step by step and returns the first error message we find.
+   * If everything is OK, it returns null (no error).
+   */
+  getPublishErrorMessage(): string | null {
+    const title = this.surveyName().trim();
+    if (title.length < 4) {
+      return 'Survey title invalid';
+    }
+
+    for (const block of this.questionBlocks()) {
+      const questionText = block.question().text.trim();
+
+      if (questionText.length < 4 || !questionText.endsWith('?')) {
+        return 'A question must end with a question mark (?)';
+      }
+
+      const hasEmptyAnswer = block.question().answers.some(
+        (answer) => answer.text.trim().length === 0,
+      );
+      if (hasEmptyAnswer) {
+        return 'An answer option is missing';
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Saves the survey title, description, category and end date in Supabase.
+   * Returns the new row from the database (we need the id for the questions).
+   */
   async createSurvey() {
     const survey = {
       title: this.surveyName(),
@@ -73,6 +115,10 @@ export class CreateSurveyForm {
     return surveyData;
   }
 
+  /**
+   * Loops through every question block on the page and saves each question
+   * plus its answers in Supabase.
+   */
   async createQuestions(id: number) {
     for (const [index, block] of this.questionBlocks().entries()) {
       const question_data = await this.dbService.setQuestions({
@@ -86,6 +132,9 @@ export class CreateSurveyForm {
     }
   }
 
+  /**
+   * Saves all answer options for one question.
+   */
   async createAnswers(question_id: string, answers: Answer[]) {
     for (const [index, answer] of answers.entries()) {
       await this.dbService.setAnswers({
@@ -99,19 +148,31 @@ export class CreateSurveyForm {
 
 
 
+  /**
+   * Sends the user back to the start page without saving.
+   */
   cancelCreation(): void {
     this.router.navigate([''])
   }
 
+  /**
+   * Adds another empty question block to the form.
+   */
   addQuestion(): void {
     const next = this.questions().length + 1;
     this.questions.update((qs) => [...qs, createEmptyQuestion(next)]);
   }
 
+  /**
+   * Replaces one question in the questions array when the child component emits a change.
+   */
   updateQuestion(index: number, question: Question): void {
     this.questions.update((qs) => qs.map((q, i) => (i === index ? question : q)));
   }
 
+  /**
+   * Removes a question from the list (but keeps at least one question).
+   */
   removeQuestion(index: number): void {
     if (this.questions().length <= 1) return;
     this.questions.update((qs) => qs.filter((_, i) => i !== index));
@@ -125,5 +186,9 @@ export class CreateSurveyForm {
 
   onCancel(): void {
     this.closed.emit();
+
   }
+
+
+
 }

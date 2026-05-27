@@ -1,0 +1,30 @@
+@if (toast.isOpen()) {
+  <div
+    class="feedback-overlay"
+    [class.feedback-overlay--visible]="toast.panelVisible()"
+    [class.feedback-overlay--exiting]="!toast.panelVisible()"
+  >
+    <button
+      type="button"
+      class="feedback-overlay__backdrop"
+      aria-label="Close notification"
+      (click)="close()"
+    ></button>
+
+    <article
+      class="feedback-toast__panel"
+      [class.feedback-toast__panel--error]="toast.isError()"
+      [class.feedback-toast__panel--visible]="toast.panelVisible()"
+      [class.feedback-toast__panel--exiting]="!toast.panelVisible()"
+      role="alertdialog"
+      aria-live="polite"
+    >
+      <div class="feedback-toast__content">
+        <p class="feedback-toast__message">{{ toast.message() }}</p>
+        <button type="button" class="feedback-toast__close" aria-label="Close" (click)="close()">
+          ✕
+        </button>
+      </div>
+    </article>
+  </div>
+}

@@ -6,7 +6,7 @@
   @include flex-center(row);
   padding: $space-xs $space-lg;
   border: none;
-  border-radius: $radius-lg;       
+  border-radius: $radius-lg;
   background: $color-accent-orange-light;
   color: $color-text-dark;
   font-family: $font-body;
@@ -19,12 +19,8 @@
     background: $color-accent-orange;
   }
 
-  &.is-active {
+  &--active {
     background: $color-accent-orange;
     font-weight: 700;
-  }
-
-  &:active {
-    transform: scale(0.98);
   }
 }

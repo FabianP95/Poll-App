@@ -1,9 +1,10 @@
 @use '../../../styles/abstracts/variables' as *;
 @use '../../../styles/abstracts/mixins' as *;
+@use '../../../styles/abstracts/functions' as *;
 
 :host.survey-card--horizontal {
-  flex: 0 0 min(85%, 18rem);
-  max-width: 20rem;
+  max-width: 100%;
+  flex: 1 1 0;
 }
 
 :host.survey-card--list {
@@ -13,74 +14,86 @@
 .survey-card {
   &__inner {
     @include flex-center();
-    position: relative;
-    min-height: 10rem;
-    padding: $space-lg;
-    border-radius: $radius-lg;
+    align-items: flex-start;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    &:hover:not(&--static) {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-
-    &--static {
-      cursor: default;
-    }
+    transition: transform 0.2s ease;
   }
 
   &__category {
     font-family: $font-body;
-    font-size: 0.8rem;
-    font-weight: 600;
+    height: 1rem;
+    font-size: rem(16);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: $space-md;
   }
 
   &__title {
     font-family: $font-body;
-    font-size: 1.1rem;
+    font-size: rem(26);
     font-weight: 700;
-    line-height: 1.3;
-    @include truncate-text(3);
-  }
-
-  &__description {
-    font-size: 0.85rem;
-    color: $color-text-muted;
-    @include truncate-text(2);
+    line-height: 1.35;
+    margin-bottom: auto;
+    padding-right: $space-md;
   }
 
   &__badge {
-    
+    @include container-rounded-top-right(#ffd89b, 20px);
     align-self: flex-start;
-    margin-top: auto;
+    color: $color-text-dark;
+    padding: 0.4rem 0.75rem;
+    font-size: rem(16);
+    font-family: $font-body;
   }
 }
 
 :host.survey-card--horizontal .survey-card__inner {
-  background: $color-bg-card-light;
+  @include container-rounded-top-right($color-text-primary, 100px);
+  min-height: 15rem;
+
+  padding: $space-2xl;
   color: $color-text-dark;
 
   .survey-card__category {
-    color: #7a6b88;
+    color: $color-text-dark;
   }
 
   .survey-card__title {
     color: $color-text-dark;
-    font-family: $font-display;
-    font-size: 1.35rem;
+  }
+
+  &:hover {
+    background-color: $color-bg-hover-options-dropdown;
+
+    .survey-card__badge {
+      background-color: $color-accent-orange;
+    }
   }
 }
 
 :host.survey-card--list .survey-card__inner {
-  @include card-base();
-  min-height: 8rem;
+  @include container-rounded-top-right($color-bg-light, 100px);
+  height: 7rem;
+  padding: $space-lg;
+  color: $color-text-primary;
 
   .survey-card__category {
-    color: $color-accent-orange;
+    color: $color-accent-orange-light;
   }
 
   .survey-card__title {
     color: $color-text-primary;
+  }
+
+  .survey-card__badge {    
+      margin-left: auto;
+    }
+
+  &:hover {
+    background-color: $color-bg-light-hover;
+
+    .survey-card__badge {    
+      background-color: $color-accent-orange;
+    }
   }
 }

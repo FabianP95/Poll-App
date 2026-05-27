@@ -13,15 +13,30 @@
 .ending-soon {
   @include flex-center();
   padding-block: $space-lg;
+  width: 100%;
+  align-items: flex-start;
 
   &__title {
-    font-size: 1.75rem;
+    font-size: rem(32);
+    color: $color-text-primary;
+    font-family: 'Mulish';
+    padding-bottom: $space-lg;
   }
 
   &__scroll {
     @include flex-center(row);
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 100%;
     overflow-x: auto;
     padding-bottom: $space-sm;
     @include hide-scrollbar;
+  }
+
+  &__empty {
+    font-family: $font-body;
+    color: $color-text-primary;
+    opacity: 0.9;
+    margin-top: $space-sm;
   }
 }

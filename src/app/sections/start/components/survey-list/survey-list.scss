@@ -1,0 +1,56 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/functions' as *;
+
+.survey-list {
+  padding: $space-xl 0 $space-2xl;
+
+  &__toolbar {
+    @include flex-center(row);
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: $space-lg;
+      justify-content: space-between;
+  }
+
+  &__tabs {
+    @include flex-center(row);
+    gap: $space-sm;
+  
+  }
+
+  &__tab {
+    border: none;
+    border-radius: $radius-sm;
+    padding: $space-sm $space-lg;
+    font-family: $font-body;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: $color-text-primary;
+    background: rgba($color-accent-orange-light, 0.25);
+    transition: background 0.2s ease;
+
+    &--active {
+      background: $color-accent-orange-light;
+      color: $color-text-dark;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $space-lg;
+    width: 100%;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__empty {
+    font-family: $font-body;
+    color: $color-text-primary;
+    font-size: rem(16);
+  }
+}

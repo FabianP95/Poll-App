@@ -18,7 +18,7 @@
         Past survey
       </button>
     </div>
-    <app-category-dropdown label="Sort by categories"></app-category-dropdown>
+    <app-category-dropdown [(value)]="activeCategory" label="Sort by categories"></app-category-dropdown>
   </div>
 
   @if (filteredSurveys().length === 0) {

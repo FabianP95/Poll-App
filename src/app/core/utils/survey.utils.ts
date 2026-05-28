@@ -35,3 +35,8 @@ export function formatDate(date: Date | null): string {
     year: 'numeric',
   });
 }
+
+export function filterSurveysByCategory(surveys: Survey[], category: string): Survey[] {
+  if (!category) return surveys;
+  return surveys.filter((s) => s.category === category);
+}

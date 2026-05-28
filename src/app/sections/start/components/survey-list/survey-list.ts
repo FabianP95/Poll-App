@@ -1,6 +1,6 @@
-import { Component, computed, input, signal} from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { Survey } from '../../../../core/interfaces/survey.interfaces';
-import { isSurveyActive } from '../../../../core/utils/survey.utils';
+import { filterSurveysByCategory, isSurveyActive } from '../../../../core/utils/survey.utils';
 import { SurveyCardComponent } from '../../../../shared/components/survey-card/survey-card';
 import { CategoryDropdownComponent } from "../../../../shared/components/category-dropdown/category-dropdown";
 
@@ -14,24 +14,20 @@ import { CategoryDropdownComponent } from "../../../../shared/components/categor
 export class SurveyList {
   surveys = input<Survey[]>([]);
   activeTab = signal<'active' | 'past'>('active');
+  activeCategory = signal('');
 
-  /**
-   * Builds the list that should be shown in the UI.
-   * - "active" tab: only running surveys
-   * - "past" tab: only finished surveys
-   */
-  filteredSurveys = computed(() => {
-    if (this.activeTab() === 'active') {
-      return this.surveys().filter((survey) => isSurveyActive(survey));
-    }
-    return this.surveys().filter((survey) => !isSurveyActive(survey));
-  });
+ 
+ filteredSurveys = computed(() => {
+  const byTab = this.activeTab() === 'active'
+    ? this.surveys().filter((s) => isSurveyActive(s))
+    : this.surveys().filter((s) => !isSurveyActive(s));
 
-  /**
-   * Switches between active and past survey tabs.
-   * The computed list above automatically recalculates after this.
-   */
+  return filterSurveysByCategory(byTab, this.activeCategory());
+});
+
+
   setTab(tab: 'active' | 'past'): void {
     this.activeTab.set(tab);
+     this.activeCategory.set('');
   }
 }

@@ -10,6 +10,7 @@ import { Supabase } from '../../../supabase';
 import { FeedbackToastService } from '../../../shared/services/feedback-toast.service';
 
 
+
 function createEmptyQuestion(index: number): Question {
   return {
     id: `q-${index}`,
@@ -69,7 +70,13 @@ export class CreateSurveyForm {
     await this.createQuestions(survey_data.id);
 
     this.feedbackToast.showSuccess('Your survey is now published');
+    setTimeout(() => {
+      this.redirectToCreatedSurvey(survey_data.id);
+    }, 3500);
+  }
 
+  redirectToCreatedSurvey(id: number) {
+    this.router.navigate(['survey/'+ id])
   }
 
   /**
@@ -81,14 +88,11 @@ export class CreateSurveyForm {
     if (title.length < 4) {
       return 'Survey title invalid';
     }
-
     for (const block of this.questionBlocks()) {
       const questionText = block.question().text.trim();
-
       if (questionText.length < 4 || !questionText.endsWith('?')) {
         return 'A question must end with a question mark (?)';
       }
-
       const hasEmptyAnswer = block.question().answers.some(
         (answer) => answer.text.trim().length === 0,
       );
@@ -96,7 +100,6 @@ export class CreateSurveyForm {
         return 'An answer option is missing';
       }
     }
-
     return null;
   }
 

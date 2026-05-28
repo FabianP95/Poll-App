@@ -1,7 +1,8 @@
 @use '../../styles/abstracts/variables' as *;
 @use '../../styles/abstracts/mixins' as *;
+@use '../../styles/abstracts/functions' as *;
 
 .survey-detail {
   min-height: 100vh;
-  background: $color-bg-dark;
+  background: white;
 }

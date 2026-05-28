@@ -1,9 +1,18 @@
 <header class="app-header">
   <div class="app-header__brand">
-    <img src="/assets/img/logo_light.png" alt="logo in the light version" class="app-header__logo"/>
+    @if (variant() == 'dark') {
+    <img src="/assets/img/logo_light.png" alt="logo in the light version" class="app-header__logo" />
+    } @else {
+    <img src="/assets/img/logo_dark.png" alt="logo in the dark version" class="app-header__logo" />
+    }
     <div class="app-header__title-box">
-         <span class="app-header__title">Poll</span>
-          <span class="app-header__title">App</span>
+      <span class="app-header__title">Poll</span>
+      <span class="app-header__title">App</span>
     </div>
   </div>
+  @if (variant() == 'light') {
+  <div>
+    <button class="app-header__button" (click)="directToCreate()">Create survey <span></span></button>
+  </div>
+  }
 </header>

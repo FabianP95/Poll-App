@@ -7,7 +7,7 @@
   justify-content: space-between;
   padding: $space-md $space-lg;
   min-height: $header-height;
-  
+
 
   &__brand {
     @include flex-center(row);
@@ -19,17 +19,27 @@
     height: 40px;
   }
 
-  &__title-box{
+  &__title-box {
     @include flex-center();
 
-    & > *:nth-child(2) {
-    margin-top: -12px; 
-  }
+    &>*:nth-child(2) {
+      margin-top: -12px;
+    }
   }
 
   &__title {
     font-family: $font-display;
     font-size: 1.5rem;
     color: $color-text-orange;
+  }
+
+  &__button {
+    @include btn-primary()
+  }
+}
+
+:host.app-header--light .app-header {
+  &__title {
+    color: $color-text-dark;
   }
 }

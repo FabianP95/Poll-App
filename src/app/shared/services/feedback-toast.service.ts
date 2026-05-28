@@ -28,7 +28,7 @@ export class FeedbackToastService {
    * @param message Text for the user, for example "Your survey is now published".
    * @param autoHideMs After how many milliseconds the toast closes itself. Default: 5 seconds.
    */
-  showSuccess(message: string, autoHideMs = 5000): void {
+  showSuccess(message: string, autoHideMs = 4000): void {
     this.openToast(message, false, autoHideMs);
   }
 

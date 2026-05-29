@@ -1,5 +1,39 @@
-<div class="survey-detail">
-  <app-app-header variant='light' [showButton]="true"/>
+<div class="survey-detail content-wrapper">
+  <app-app-header variant='light' [showButton]="true" />
+  <div class="grid-layout">
+    <section class="survey-fill-out">
+      <article class="survey-fill-out__header">
+        <span class="survey-fill-out__badge">Published</span>
+        <div class="survey-fill-out__info">
+          @if (survey()?.end_date != null) {
+          <p>Ends on {{formattedEndDate()}}</p>
+          }
+          @if (survey()?.category != null) {
+          <p>Category: {{survey()?.category}}</p>
+          }
+        </div>
+        <h1>{{survey()?.title}}</h1>
+        @if (survey()?.description != '') {
+        <p>{{survey()?.description}} </p>
+        }
+      </article>
+      <section class="questions-grid">
+        @for (question of questions(); track $index) {
+        <app-question-answer-block [singleQ]="question"></app-question-answer-block>
+        }
+      </section>
+      <div class="survey-fill-out__btn-container">
+        @if (true) {
+        <p>Test Error</p>
+        }
+        <button>Complete survey <span></span></button>
+      </div>
+    </section>
+    <section class="survey-results">
+      <app-question-results></app-question-results>
+    </section>
+  </div>
 
- 
+
+
 </div>

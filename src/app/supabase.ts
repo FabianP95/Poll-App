@@ -59,6 +59,30 @@ export class Supabase {
     } as Survey;
   }
 
+  async getQuestionsBySurveyId(id: number): Promise<Question[] | null> {
+    const { data, error } = await this.supabase
+      .from('questions')
+      .select('*')
+      .eq('survey_id', id);
+
+    if (error || !data) {
+      
+      return null;
+    }
+    return data.sort((a, b) => a.order - b.order) as Question[];
+  }
+
+  async getAnswersByQuestionId(id: string): Promise<Answer[] | null> {
+    const { data, error } = await this.supabase
+      .from('answers')
+      .select('*')
+      .eq('question_id', id);
+    if (error || !data) {
+      return null;
+    }
+    return data.sort((a, b) => a.letter.localeCompare(b.letter)) as Answer[];
+  }
+
   /**
    * Starts a realtime listener on the surveys table.
    * Whenever data changes, the given callback is called.

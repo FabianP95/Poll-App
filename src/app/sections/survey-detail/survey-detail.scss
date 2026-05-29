@@ -6,3 +6,76 @@
   min-height: 100vh;
   background: white;
 }
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-top: 50px;
+}
+
+.survey-fill-out {
+  grid-column: 1;
+  @include container-rounded-top-right($color-bg-survey-fill-out, 150px);
+  height: fit-content;
+  padding: 50px;
+
+  &__header {
+    @include flex-center();
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  &__badge {
+    @include container-rounded-top-right($color-text-orange, 15px);
+    padding: 5px 10px;
+    font-size: rem(16);
+    font-family: 'Mulish';
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  &__info {
+    @include flex-center(row);
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+
+    >p {
+      color: $color-text-dark;
+      font-family: $font-display;
+      font-size: rem(18);
+      padding: 4px;
+      border-radius: $radius-sm;
+      text-decoration: underline;
+    }
+
+    >button {
+      @include btn-secondary('/assets/img/btn-img/check.svg');
+      color: $color-text-dark;
+    }
+  }
+}
+
+.questions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.survey-results {
+  grid-column: 2;
+  height: fit-content;
+}

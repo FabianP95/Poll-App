@@ -94,9 +94,6 @@
   &__multiple input[type="checkbox"]:checked {
     background: $color-accent-orange;
     border-color: $color-accent-orange;
-  }
-
-  &__multiple input[type="checkbox"]:checked {
     width: 18px;
     height: 18px;
     background-image: url('/assets/img/btn-img/check.svg');

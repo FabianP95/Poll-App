@@ -1,0 +1,87 @@
+@use '../../../../styles/abstracts/variables' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+@use '../../../../styles/abstracts/functions' as *;
+
+.question-block {
+  display: flex;
+  flex-direction: column;
+  font-family: $font-body;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    margin-bottom: 20px
+  }
+
+  &__text-group {
+    @include flex-center(row);
+    font-size: rem(18);
+    gap: 5px;
+    font-weight: 600;
+  }
+
+  &__number {
+    white-space: nowrap;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__multiple {
+    margin: 0;
+    font-size: rem(14);
+    padding-left: 20px;
+  }
+}
+
+.answer {
+  padding: 5px 0 5px 20px;
+
+  &__item {
+    @include flex-center(row);
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  &__item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid $color-text-dark;
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__item input[type="checkbox"]:checked {
+    background: $color-accent-orange;
+    border-color: $color-accent-orange;
+    width: 18px;
+    height: 18px;
+    background-image: url('/assets/img/btn-img/check.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 11px;
+    border-color: $color-accent-orange;
+  }
+
+  &__item:hover {
+    background-color: $color-accent-orange-light;
+    border-radius: 5px;
+  }
+
+  &__text {
+    font-size: rem(16);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+}

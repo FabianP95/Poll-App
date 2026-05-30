@@ -1,21 +1,20 @@
 <div class="question-block">
   <div class="question-block__header">
     <div class="question-block__text-group">
-      <span class="question-block__number">{{ (singleQ()?.order ?? 0) + 1 }}.</span>
-      <span class="question-block__title">{{singleQ()?.text}}</span>
+      <span class="question-block__number">{{ (questionsArray()?.order ?? 0) + 1 }}.</span>
+      <span class="question-block__title">{{questionsArray()?.text}}</span>
     </div>
-    @if (singleQ()?.allow_multiple_answers === true) {
+    @if (questionsArray()?.allow_multiple_answers === true) {
     <span class="question-block__multiple">More then one answer is possible.</span>
     }
   </div>
-  @for (answer of singleQ()?.answers; track $index) {
+  @for (answer of questionsArray()?.answers; track $index) {
   <div class="answer">
     <label class="answer__item">
-      <input type="checkbox" />
+      <input type="checkbox" [checked]="isSelected(answer.id)" (change)="toggleAnswer(answer.id)" />
       <p><strong>{{answer.letter}}.</strong></p>
       <span class="answer__text">{{answer.text}}</span>
     </label>
   </div>
   }
-
 </div>

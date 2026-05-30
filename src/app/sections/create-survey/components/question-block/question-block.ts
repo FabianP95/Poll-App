@@ -61,27 +61,29 @@ export class QuestionBlock {
       ...q,
       answers: [
         ...q.answers,
-        { question_id: '', letter: nextLetter, text: '', votes: 0 },
+        { id: '', question_id: '', letter: nextLetter, text: '', votes: 0 },
       ],
     });
   }
 
   removeAnswer(index: number): void {
-  const q = this.question();
-  
-  if (q.answers.length <= 2) {
-    this.emit({...q,
-      answers: q.answers.map((a, i) => 
-        i === index ? { ...a, text: '' } : a
-      ),
-    }); return;
+    const q = this.question();
+
+    if (q.answers.length <= 2) {
+      this.emit({
+        ...q,
+        answers: q.answers.map((a, i) =>
+          i === index ? { ...a, text: '' } : a
+        ),
+      }); return;
+    }
+    this.emit({
+      ...q,
+      answers: q.answers
+        .filter((_, i) => i !== index)
+        .map((a, i) => ({ ...a, letter: String.fromCharCode(65 + i) })),
+    });
   }
-  this.emit({...q,
-    answers: q.answers
-      .filter((_, i) => i !== index)
-      .map((a, i) => ({ ...a, letter: String.fromCharCode(65 + i) })),
-  });
-}
 
   toggleMultiple(checked: boolean): void {
     this.emit({ ...this.question(), allow_multiple_answers: checked });

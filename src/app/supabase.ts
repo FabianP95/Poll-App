@@ -15,11 +15,7 @@ export class Supabase {
   supabase = createClient(this.supabaseUrl, this.supabaseKey);
   channels: RealtimeChannel | undefined;
 
-  /**
-   * Loads all surveys from Supabase.
-   * We also convert the end_date string into a Date object
-   * so existing date helper functions can work directly.
-   */
+
   async getSurveyData(): Promise<Survey[]> {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -37,10 +33,7 @@ export class Supabase {
     })) as Survey[];
   }
 
-  /**
-   * Loads one survey by id for the detail page.
-   * Returns null when nothing is found or when an error happens.
-   */
+
   async getSurveyById(id: string): Promise<Survey | null> {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -66,7 +59,7 @@ export class Supabase {
       .eq('survey_id', id);
 
     if (error || !data) {
-      
+
       return null;
     }
     return data.sort((a, b) => a.order - b.order) as Question[];
@@ -83,10 +76,18 @@ export class Supabase {
     return data.sort((a, b) => a.letter.localeCompare(b.letter)) as Answer[];
   }
 
-  /**
-   * Starts a realtime listener on the surveys table.
-   * Whenever data changes, the given callback is called.
-   */
+  async getVotesByAnswerId(id: string): Promise<number | null> {
+    const { data, error } = await this.supabase
+      .from('votes')
+      .select('*')
+      .eq('answer_id', id);
+    if (error || !data) {
+      return null;
+    }
+    return data.length;
+  }
+
+
   subscribeSurveyChanges(onChange: () => void): void {
     this.stopSurveySubscription();
 
@@ -102,20 +103,14 @@ export class Supabase {
       .subscribe();
   }
 
-  /**
-   * Stops the current survey realtime channel.
-   * We call this when leaving the page to avoid duplicate listeners.
-   */
+
   stopSurveySubscription(): void {
     if (!this.channels) return;
     this.supabase.removeChannel(this.channels);
     this.channels = undefined;
   }
 
-  /**
-   * Inserts one survey row into the surveys table.
-   * Returns the inserted survey from Supabase.
-   */
+
   async setSurvey(survey: Omit<Survey, 'id' | 'created_at'>) {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -128,10 +123,6 @@ export class Supabase {
     return data;
   }
 
-  /**
-   * Inserts one question row for a survey.
-   * Returns the inserted question data.
-   */
   async setQuestions(question: Omit<Question, 'id' | 'answers'>) {
     const { data, error } = await this.supabase
       .from('questions')
@@ -144,11 +135,8 @@ export class Supabase {
     return data;
   }
 
-  /**
-   * Inserts one answer row for a question.
-   * Returns the inserted answer data.
-   */
-  async setAnswers(answer: Omit<Answer, 'votes'>) {
+
+  async setAnswers(answer: Omit<Answer, 'id' | 'votes'>) {
     const { data, error } = await this.supabase
       .from('answers')
       .insert([
@@ -159,10 +147,24 @@ export class Supabase {
     return data;
   }
 
-  /**
-   * Angular lifecycle hook.
-   * Makes sure an open realtime subscription is cleaned up.
-   */
+  async setVotes(surveyId: number, selectedVotes: { questionId: string; answerIds: string[] }[]): Promise<void> {
+    const rows = selectedVotes.flatMap(v =>
+      v.answerIds.map(answerId => ({
+        answer_id: answerId,
+        question_id: v.questionId,
+        survey_id: surveyId
+      }))
+    );
+
+    const { error } = await this.supabase
+      .from('votes')
+      .insert(rows)
+      .select();
+
+    if (error) console.error(error);
+  }
+
+
   ngOnDestroy() {
     this.stopSurveySubscription();
   }

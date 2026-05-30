@@ -24,18 +24,24 @@ export class SurveyDetailComponent {
   loadedQuestions = signal(true);
   loadedAnswers = signal(true);
 
+  votes = signal(null);
+  selectedVotes = signal<{ questionId: string; answerIds: string[] }[]>([]);
+
+  showError = signal(false);
+
+  resetCounter = signal(0);
+
   constructor() {
     this.loadSurvey();
   }
 
-  
+
   async loadSurvey(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
       this.loading.set(false);
       return;
     }
-
     const data = await this.dbService.getSurveyById(id);
     if (data) await this.loadQuestions(data.id);
     this.survey.set(data);
@@ -57,18 +63,57 @@ export class SurveyDetailComponent {
 
   async loadAnswers(id: string): Promise<void> {
     const data = await this.dbService.getAnswersByQuestionId(id);
-    if (!id) {
+    if (!id || !data) {
       this.loadedAnswers.set(false);
       return;
     }
+    const answersWithVotes = await this.getVotesByAnswer(data)
 
     this.questions.update(qs =>
-      qs?.map(q => q.id === id ? { ...q, answers: data ?? [] } : q) ?? null
+      qs?.map(q => q.id === id ? { ...q, answers: answersWithVotes } : q) ?? null
     );
     this.loadedAnswers.set(false);
   }
 
-  
+  async getVotesByAnswer(data: Answer[]): Promise<Answer[]> {
+    return await Promise.all(
+      data.map(async answer => ({
+        ...answer,
+        votes: await this.dbService.getVotesByAnswerId(answer.id) ?? 0
+      }))
+    );
+  }
+
+  onAnswersChange(questionId: string, answerIds: string[]): void {
+    this.selectedVotes.update(votes => {
+      const existing = votes.find(v => v.questionId === questionId);
+      if (existing) {
+        return votes.map(v => v.questionId === questionId ? { ...v, answerIds } : v);
+      }
+      return [...votes, { questionId, answerIds }];
+    });
+    console.log(this.selectedVotes());
+  }
+
+  allQuestionsAnswered(): boolean {
+    const questionIds = this.questions()?.map(q => q.id) ?? [];
+    return questionIds.every(id =>
+      this.selectedVotes().some(v => v.questionId === id && v.answerIds.length > 0)
+    );
+  }
+
+  submitSurvey(): void {
+    if (!this.allQuestionsAnswered()) {
+      this.showError.set(true);
+      setTimeout(() => this.showError.set(false), 3000);
+      return;
+    }
+    this.showError.set(false);
+    this.dbService.setVotes(this.survey()!.id, this.selectedVotes());
+    this.selectedVotes.set([]);
+    this.resetCounter.update(c => c + 1);
+  }
+
   formattedEndDate(): string {
     const current = this.survey();
     if (!current) return '';

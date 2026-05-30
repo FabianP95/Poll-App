@@ -19,21 +19,31 @@
       </article>
       <section class="questions-grid">
         @for (question of questions(); track $index) {
-        <app-question-answer-block [singleQ]="question"></app-question-answer-block>
+        <app-question-answer-block [questionsArray]="question"
+          (answersChange)="onAnswersChange(question.id, $event)" [resetSignal]="resetCounter()"></app-question-answer-block>
         }
       </section>
       <div class="survey-fill-out__btn-container">
-        @if (true) {
-        <p>Test Error</p>
+        @if (showError()) {
+        <p>Please answer all questions before submitting.</p>
         }
-        <button>Complete survey <span></span></button>
+        <button (click)="submitSurvey()">Complete survey <span></span></button>
       </div>
     </section>
     <section class="survey-results">
-      <app-question-results></app-question-results>
+      <article class="survey-results__container">
+        <p class="survey-results__header">Survey results <span>LIVE</span></p>
+        @if (questions()?.some(q => q.answers.some(a => a.votes > 0))) {
+        @for (question of questions(); track $index) {
+        <app-question-results [questionsArray]="question"></app-question-results>
+        }
+        } @else {
+        <div class="survey-results__empty">
+          <p>Results will be shown here after participants complete the survey.</p>
+          <span>There are no answears yet.</span>
+        </div>
+        }
+      </article>
     </section>
   </div>
-
-
-
 </div>

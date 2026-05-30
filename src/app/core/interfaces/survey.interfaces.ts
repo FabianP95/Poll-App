@@ -13,20 +13,16 @@ export interface Question {
   survey_id: number;
   text: string;
   allow_multiple_answers: boolean;
-  order:number;
+  order: number;
   answers: Answer[];
 }
 
 export interface Answer {
+  id: string
   question_id: string,
   text: string;
-  letter: string; 
+  letter: string;
   votes: number // check if necessary
-}
-
-export interface VoteResult {
-  label: string;
-  percentage: number; // necessary?
 }
 
 export interface QuestionValidationResult {

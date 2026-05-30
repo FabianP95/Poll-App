@@ -19,8 +19,8 @@ function createEmptyQuestion(index: number): Question {
     text: '',
     allow_multiple_answers: false,
     answers: [
-      { question_id: '', letter: 'A', text: '', votes: 0 },
-      { question_id: '', letter: 'B', text: '', votes: 0 },
+      { id: '', question_id: '', letter: 'A', text: '', votes: 0 },
+      { id: '', question_id: '', letter: 'B', text: '', votes: 0 },
     ],
   };
 }
@@ -76,7 +76,7 @@ export class CreateSurveyForm {
   }
 
   redirectToCreatedSurvey(id: number) {
-    this.router.navigate(['survey/'+ id])
+    this.router.navigate(['survey/' + id])
   }
 
   /**

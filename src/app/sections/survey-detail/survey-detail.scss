@@ -63,6 +63,7 @@
     }
 
     >button {
+      margin-left: auto;
       @include btn-secondary('/assets/img/btn-img/check.svg');
       color: $color-text-dark;
     }
@@ -78,4 +79,38 @@
 .survey-results {
   grid-column: 2;
   height: fit-content;
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100%;
+
+
+  &__container {
+    @include flex-center();
+    align-items: flex-start;
+    
+    height: fit-content;
+    min-height: 100%;
+
+  }
+
+  &__header {
+    font-family: $font-display;
+    font-size: rem(32);
+
+    >span {
+      color: $color-text-orange;
+    }
+  }
+
+  &__empty {
+    font-size: rem(18);
+    font-weight: bold;
+    font-family: $font-body;
+    display: grid;
+
+    >span {
+      justify-self: center;
+      padding: 150px 0;
+    }
+  }
 }

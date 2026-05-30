@@ -1,1 +1,16 @@
-<p>question-results works!</p>
+<div class="question-results">
+    <div class="question-results__header">
+        <span class="question-results__number">{{ (questionsArray()?.order ?? 0) + 1 }}.</span>
+        <span class="question-results__title">{{questionsArray()?.text}}</span>
+    </div>
+    @for (answer of questionsArray()?.answers; track $index) {
+    <div class="question-results__answers">
+        <p>{{answer.letter}}.</p>
+        <div class="question-results__answer-bar">
+            <div class="question-results__answer-bar-fill" [style.width.%]="(answer.votes / totalVotes()) * 100">
+            </div>
+        </div>
+        <div class="question-results__answer-percentage">{{(answer.votes/totalVotes())*100}}%</div>
+    </div>
+    }
+</div>

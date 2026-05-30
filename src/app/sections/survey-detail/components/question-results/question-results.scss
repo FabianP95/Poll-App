@@ -1,3 +1,35 @@
 @use '../../../../styles/abstracts/variables' as *;
 @use '../../../../styles/abstracts/mixins' as *;
 @use '../../../../styles/abstracts/functions' as *;
+
+.question-results {
+    min-width: 100%;
+    width: 200px;
+
+    &__header {}
+
+    &__number {}
+
+    &__title {}
+
+    &__answers {
+        @include flex-center(row);
+        gap: 20px;
+    }
+
+    &__answer-bar {
+        min-width: 100%;
+        background: $color-text-muted;
+        border-radius: 4px;
+        height: 8px;
+
+        &-fill {
+            height: 100%;
+            background: $color-accent-orange;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    }
+
+    &__answer-percentage {}
+}

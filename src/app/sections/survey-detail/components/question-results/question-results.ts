@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { Answer, Question } from '../../../../core/interfaces/survey.interfaces';
 
 @Component({
@@ -12,9 +12,12 @@ export class QuestionResults {
 
   votesCounted = signal(null)
 
+  totalVotes = computed(() =>
+    this.questionsArray()?.answers.reduce((sum, a) => sum + a.votes, 0) ?? 0
+  );
   constructor() {
 
   }
 
- 
+
 }

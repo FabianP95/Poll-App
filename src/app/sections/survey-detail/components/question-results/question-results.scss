@@ -4,32 +4,51 @@
 
 .question-results {
     min-width: 100%;
-    width: 200px;
+    font-family: $font-body;
+    font-size: rem(16);
+    padding: 10px 0;
 
-    &__header {}
-
-    &__number {}
-
-    &__title {}
+    &__header {
+        @include flex-center(row);
+        padding: 10px 0;
+        font-weight: bold;
+        gap: 5px;
+        font-size: rem(18);
+        justify-content: start;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        align-items: flex-start;
+    }
 
     &__answers {
         @include flex-center(row);
         gap: 20px;
+        width: 100%;
+
+
+        p {
+            min-width: 20px;
+        }
     }
 
     &__answer-bar {
-        min-width: 100%;
-        background: $color-text-muted;
+        flex: 1;
+        min-width: 0;
+        background: $bg-progress-bar;
         border-radius: 4px;
         height: 8px;
 
         &-fill {
             height: 100%;
-            background: $color-accent-orange;
+            background: $color-text-orange;
             border-radius: 4px;
             transition: width 0.3s ease;
         }
     }
 
-    &__answer-percentage {}
+    &__answer-percentage {
+        min-width: 40px;
+        color: $color-accent-orange-dark;
+        font-weight: bold;
+    }
 }

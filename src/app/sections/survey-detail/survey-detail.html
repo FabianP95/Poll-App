@@ -19,8 +19,8 @@
       </article>
       <section class="questions-grid">
         @for (question of questions(); track $index) {
-        <app-question-answer-block [questionsArray]="question"
-          (answersChange)="onAnswersChange(question.id, $event)" [resetSignal]="resetCounter()"></app-question-answer-block>
+        <app-question-answer-block [questionsArray]="question" (answersChange)="onAnswersChange(question.id, $event)"
+          [resetSignal]="resetCounter()"></app-question-answer-block>
         }
       </section>
       <div class="survey-fill-out__btn-container">

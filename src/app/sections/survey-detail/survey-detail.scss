@@ -87,10 +87,9 @@
   &__container {
     @include flex-center();
     align-items: flex-start;
-    
     height: fit-content;
     min-height: 100%;
-
+    align-items: stretch;
   }
 
   &__header {

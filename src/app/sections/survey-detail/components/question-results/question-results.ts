@@ -1,9 +1,9 @@
 import { Component, computed, input, signal } from '@angular/core';
 import { Answer, Question } from '../../../../core/interfaces/survey.interfaces';
-
+import { DecimalPipe } from '@angular/common';
 @Component({
   selector: 'app-question-results',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './question-results.html',
   styleUrl: './question-results.scss',
 })

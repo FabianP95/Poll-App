@@ -1,7 +1,7 @@
 <div class="question-results">
     <div class="question-results__header">
         <span>{{ (questionsArray()?.order ?? 0) + 1 }}.</span>
-        <span>{{questionsArray()?.text + 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg'}}</span>
+        <span class="question-results__question">{{questionsArray()?.text}}</span>
     </div>
     @for (answer of questionsArray()?.answers; track $index) {
     <div class="question-results__answers">

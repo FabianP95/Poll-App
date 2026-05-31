@@ -13,8 +13,14 @@
   }
 }
 
-@mixin desktop {
-  @media (min-width: $bp-desktop) {
+@mixin desktop-small {
+  @media (max-width: $second-bp-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop-big {
+  @media (max-width: $first-bp-desktop) {
     @content;
   }
 }
@@ -27,7 +33,7 @@
 }
 
 @mixin container {
-  width: $container-max;
+  max-width: $container-max;
   margin: $margin-wrapper;
 }
 

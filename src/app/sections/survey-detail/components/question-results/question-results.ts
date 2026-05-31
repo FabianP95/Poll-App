@@ -15,9 +15,7 @@ export class QuestionResults {
   totalVotes = computed(() =>
     this.questionsArray()?.answers.reduce((sum, a) => sum + a.votes, 0) ?? 0
   );
-  constructor() {
-
-  }
+  
 
 
 }

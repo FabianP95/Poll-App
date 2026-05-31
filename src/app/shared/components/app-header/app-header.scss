@@ -4,6 +4,8 @@
 .app-header {
   @include flex-center(row);
   @include container();
+  max-width: 1440px;
+  width: 100%;
   justify-content: space-between;
   padding: $space-md $space-lg;
   min-height: $header-height;
@@ -13,6 +15,7 @@
   &__brand {
     @include flex-center(row);
     gap: 5px;
+    text-decoration: none;
   }
 
   &__logo {
@@ -35,7 +38,11 @@
   }
 
   &__button {
-    @include btn-primary()
+    @include btn-primary();
+
+    @include mobile {
+      display: none;
+    }
   }
 }
 

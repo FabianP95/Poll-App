@@ -6,6 +6,8 @@ import { Answer, Question, Survey } from '../../core/interfaces/survey.interface
 import { formatDate } from '../../core/utils/survey.utils';
 import { QuestionAnswerBlock } from './components/question-answer-block/question-answer-block';
 import { QuestionResults } from "./components/question-results/question-results";
+import { FeedbackToastService } from '../../shared/services/feedback-toast.service';
+import { RealtimeChannel } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-survey-detail',
@@ -16,10 +18,10 @@ import { QuestionResults } from "./components/question-results/question-results"
 export class SurveyDetailComponent {
   route = inject(ActivatedRoute);
   dbService = inject(Supabase);
-
+  feedbackToast = inject(FeedbackToastService);
   survey = signal<Survey | null>(null);
   questions = signal<(Question & { answers: Answer[] })[] | null>(null);
-
+  channelVotes: RealtimeChannel;
   loading = signal(true);
   loadedQuestions = signal(true);
   loadedAnswers = signal(true);
@@ -32,6 +34,29 @@ export class SurveyDetailComponent {
   resetCounter = signal(0);
 
   constructor() {
+    this.channelVotes = this.dbService.supabase.channel('surveys-live-channel')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'votes' },
+        (payload) => {
+          const answerId = payload.new['answer_id'];
+
+          this.questions.update(qs =>
+            qs?.map(q => ({
+              ...q,
+              answers: q.answers.map(a =>
+                a.id === answerId
+                  ? { ...a, votes: (a.votes as number) + 1 }
+                  : a
+              )
+            })) ?? null
+          );
+        }
+      )
+      .subscribe()
+  }
+
+  ngOnInit() {
     this.loadSurvey();
   }
 
@@ -92,7 +117,6 @@ export class SurveyDetailComponent {
       }
       return [...votes, { questionId, answerIds }];
     });
-    console.log(this.selectedVotes());
   }
 
   allQuestionsAnswered(): boolean {
@@ -108,6 +132,7 @@ export class SurveyDetailComponent {
       setTimeout(() => this.showError.set(false), 3000);
       return;
     }
+    this.feedbackToast.showSuccess('Thank you for participating. Go back by clicking the icon in the top left.');
     this.showError.set(false);
     this.dbService.setVotes(this.survey()!.id, this.selectedVotes());
     this.selectedVotes.set([]);
@@ -118,5 +143,9 @@ export class SurveyDetailComponent {
     const current = this.survey();
     if (!current) return '';
     return formatDate(current.end_date);
+  }
+
+  ngOnDestroy() {
+    this.dbService.supabase.removeChannel(this.channelVotes)
   }
 }

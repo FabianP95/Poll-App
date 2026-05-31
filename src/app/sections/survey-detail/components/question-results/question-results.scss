@@ -15,9 +15,12 @@
         gap: 5px;
         font-size: rem(18);
         justify-content: start;
+        align-items: flex-start;
+    }
+
+    &__question {
         overflow-wrap: break-word;
         word-break: break-word;
-        align-items: flex-start;
     }
 
     &__answers {

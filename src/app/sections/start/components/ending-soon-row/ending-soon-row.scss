@@ -4,9 +4,16 @@
 
 .header-your-surveys {
   @include flex-center();
+  padding: 20px;
+  box-sizing: border-box;
 
   >h2 {
-    font-size: rem(72)
+    font-size: rem(72);
+
+    @include mobile {
+      font-size: rem(40);
+      padding: 20px 0;
+    }
   }
 }
 
@@ -21,6 +28,10 @@
     color: $color-text-primary;
     font-family: 'Mulish';
     padding-bottom: $space-lg;
+
+    @include mobile {
+      font-size: rem(25);
+    }
   }
 
   &__scroll {

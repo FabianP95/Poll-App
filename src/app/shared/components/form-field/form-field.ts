@@ -15,6 +15,9 @@ export class FormFieldComponent {
   type = input<'input' | 'textarea' | 'date'>('input');
   value = model('');
 
+  /**
+   * Clears the form field value.
+   */
   onDelete(): void {
     this.value.set('');
   }

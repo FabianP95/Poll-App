@@ -26,8 +26,7 @@ export class StartComponent {
     }
 
     /**
-     * Loads surveys from Supabase and stores them in the local signal.
-     * The template updates automatically because it reads from this signal.
+     * Loads all surveys from the database.
      */
     async loadSurveys(): Promise<void> {
         const data = await this.dbService.getSurveyData();
@@ -35,8 +34,7 @@ export class StartComponent {
     }
 
     /**
-     * Cleans up the realtime subscription when the component is destroyed.
-     * This prevents having multiple listeners after page navigation.
+     * stops channel subscription
      */
     ngOnDestroy(): void {
         this.dbService.stopSurveySubscription();

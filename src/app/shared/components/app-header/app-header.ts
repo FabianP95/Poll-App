@@ -18,6 +18,9 @@ export class AppHeader {
     return `app-header--${this.variant()}`;
   }
 
+  /**
+   * Navigates to the create survey page.
+   */
   directToCreate(){
     this.router.navigate(['create-survey'])
   }

@@ -40,8 +40,6 @@ export class SurveyDetailComponent {
   @HostListener('window:resize')
   onResize() {
     this.showToggleDropdown = window.innerWidth <= 768;
-    console.log(window.innerWidth);
-    
   }
 
   constructor() {
@@ -72,6 +70,9 @@ export class SurveyDetailComponent {
   }
 
 
+  /**
+   * Loads the survey data from the route parameter.
+   */
   async loadSurvey(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) {
@@ -85,6 +86,10 @@ export class SurveyDetailComponent {
   }
 
 
+  /**
+   * Loads all questions for a survey.
+   * @param id The survey ID
+   */
   async loadQuestions(id: number): Promise<void> {
     const data = await this.dbService.getQuestionsBySurveyId(id);
     if (!id) {
@@ -97,6 +102,10 @@ export class SurveyDetailComponent {
   }
 
 
+  /**
+   * Loads all answers for a question.
+   * @param id The question ID
+   */
   async loadAnswers(id: string): Promise<void> {
     const data = await this.dbService.getAnswersByQuestionId(id);
     if (!id || !data) {
@@ -111,6 +120,11 @@ export class SurveyDetailComponent {
     this.loadedAnswers.set(false);
   }
 
+  /**
+   * Fetches vote counts for all answers.
+   * @param data Array of answers
+   * @returns Promise that resolves to answers with vote counts
+   */
   async getVotesByAnswer(data: Answer[]): Promise<Answer[]> {
     return await Promise.all(
       data.map(async answer => ({
@@ -120,6 +134,11 @@ export class SurveyDetailComponent {
     );
   }
 
+  /**
+   * Updates selected answers when user makes a selection.
+   * @param questionId The question ID
+   * @param answerIds Array of selected answer IDs
+   */
   onAnswersChange(questionId: string, answerIds: string[]): void {
     this.selectedVotes.update(votes => {
       const existing = votes.find(v => v.questionId === questionId);
@@ -130,6 +149,10 @@ export class SurveyDetailComponent {
     });
   }
 
+  /**
+   * Checks if all questions in the survey have been answered.
+   * @returns True if all questions are answered
+   */
   allQuestionsAnswered(): boolean {
     const questionIds = this.questions()?.map(q => q.id) ?? [];
     return questionIds.every(id =>
@@ -137,6 +160,9 @@ export class SurveyDetailComponent {
     );
   }
 
+  /**
+   * Submits the survey responses to the database.
+   */
   submitSurvey(): void {
     if (!this.allQuestionsAnswered()) {
       this.showError.set(true);
@@ -150,12 +176,19 @@ export class SurveyDetailComponent {
     this.resetCounter.update(c => c + 1);
   }
 
+   /**
+   * formats the enddate of the survey
+   * @returns formatted enddate
+   */
   formattedEndDate(): string {
     const current = this.survey();
     if (!current) return '';
     return formatDate(current.end_date);
   }
 
+   /**
+   * removes the channel listening for changes on destroy
+   */
   ngOnDestroy() {
     this.dbService.supabase.removeChannel(this.channelVotes)
   }

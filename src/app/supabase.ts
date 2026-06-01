@@ -16,6 +16,10 @@ export class Supabase {
   channels: RealtimeChannel | undefined;
 
 
+  /**
+   * Fetches all surveys from the database.
+   * @returns Promise that resolves to an array of Survey objects
+   */
   async getSurveyData(): Promise<Survey[]> {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -34,6 +38,11 @@ export class Supabase {
   }
 
 
+  /**
+   * Fetches a single survey by its ID.
+   * @param id The survey ID to look for
+   * @returns Promise that resolves to a Survey object or null if not found
+   */
   async getSurveyById(id: string): Promise<Survey | null> {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -52,6 +61,11 @@ export class Supabase {
     } as Survey;
   }
 
+  /**
+   * Fetches all questions for a specific survey.
+   * @param id The survey ID
+   * @returns Promise that resolves to an array of Question objects or null
+   */
   async getQuestionsBySurveyId(id: number): Promise<Question[] | null> {
     const { data, error } = await this.supabase
       .from('questions')
@@ -65,6 +79,11 @@ export class Supabase {
     return data.sort((a, b) => a.order - b.order) as Question[];
   }
 
+  /**
+   * Fetches all answers for a specific question.
+   * @param id The question ID
+   * @returns Promise that resolves to an array of Answer objects or null
+   */
   async getAnswersByQuestionId(id: string): Promise<Answer[] | null> {
     const { data, error } = await this.supabase
       .from('answers')
@@ -76,6 +95,11 @@ export class Supabase {
     return data.sort((a, b) => a.letter.localeCompare(b.letter)) as Answer[];
   }
 
+  /**
+   * Gets the number of votes for a specific answer.
+   * @param id The answer ID
+   * @returns Promise that resolves to the vote count or null
+   */
   async getVotesByAnswerId(id: string): Promise<number | null> {
     const { data, error } = await this.supabase
       .from('votes')
@@ -88,6 +112,10 @@ export class Supabase {
   }
 
 
+  /**
+   * Subscribes to real-time survey changes.
+   * @param onChange Callback function to execute when surveys change
+   */
   subscribeSurveyChanges(onChange: () => void): void {
     this.stopSurveySubscription();
 
@@ -104,6 +132,9 @@ export class Supabase {
   }
 
 
+  /**
+   * Stops listening to survey changes.
+   */
   stopSurveySubscription(): void {
     if (!this.channels) return;
     this.supabase.removeChannel(this.channels);
@@ -111,6 +142,11 @@ export class Supabase {
   }
 
 
+  /**
+   * Creates a new survey in the database.
+   * @param survey The survey data to insert
+   * @returns Promise that resolves to the created survey data
+   */
   async setSurvey(survey: Omit<Survey, 'id' | 'created_at'>) {
     const { data, error } = await this.supabase
       .from('surveys')
@@ -123,6 +159,11 @@ export class Supabase {
     return data;
   }
 
+  /**
+   * Creates a new question in the database.
+   * @param question The question data to insert
+   * @returns Promise that resolves to the created question data
+   */
   async setQuestions(question: Omit<Question, 'id' | 'answers'>) {
     const { data, error } = await this.supabase
       .from('questions')
@@ -136,6 +177,11 @@ export class Supabase {
   }
 
 
+  /**
+   * Creates a new answer in the database.
+   * @param answer The answer data to insert
+   * @returns Promise that resolves to the created answer data
+   */
   async setAnswers(answer: Omit<Answer, 'id' | 'votes'>) {
     const { data, error } = await this.supabase
       .from('answers')
@@ -147,6 +193,11 @@ export class Supabase {
     return data;
   }
 
+  /**
+   * Saves votes for a survey response.
+   * @param surveyId The survey ID
+   * @param selectedVotes Array of question and answer selections
+   */
   async setVotes(surveyId: number, selectedVotes: { questionId: string; answerIds: string[] }[]): Promise<void> {
     const rows = selectedVotes.flatMap(v =>
       v.answerIds.map(answerId => ({

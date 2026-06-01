@@ -28,6 +28,9 @@ export class CategoryDropdownComponent {
     return `category-dropdown--${this.mode()}`;
   }
 
+  /**
+   * Toggles the dropdown menu open/closed.
+   */
   toggle() {
     this.isOpen = !this.isOpen;
     if (this.mode() === 'toggle') {

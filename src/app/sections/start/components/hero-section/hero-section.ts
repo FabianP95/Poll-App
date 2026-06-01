@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class HeroSection {
   router = inject(Router);
   
+  /**
+   * Navigates to the create survey page.
+   */
   createSurvey() {
     this.router.navigate(['create-survey'])
   }

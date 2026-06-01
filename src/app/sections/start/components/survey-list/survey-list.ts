@@ -26,6 +26,10 @@ export class SurveyList {
 });
 
 
+  /**
+   * Changes the active tab between active and past surveys.
+   * @param tab The tab to set as active
+   */
   setTab(tab: 'active' | 'past'): void {
     this.activeTab.set(tab);
      this.activeCategory.set('');

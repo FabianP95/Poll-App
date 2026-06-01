@@ -22,7 +22,7 @@ export interface Answer {
   question_id: string,
   text: string;
   letter: string;
-  votes: number // check if necessary
+  votes: number
 }
 
 export interface QuestionValidationResult {

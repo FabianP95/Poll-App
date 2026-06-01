@@ -19,9 +19,13 @@ export class QuestionAnswerBlock {
       this.selectedAnswers.set([]);
     });
   }
+
+  /**
+   * Toggles an answer selection.
+   * @param answerId The ID of the answer to toggle
+   */
   toggleAnswer(answerId: string): void {
     const allowMultiple = this.questionsArray()?.allow_multiple_answers;
-
     if (allowMultiple) {
       this.selectedAnswers.update(selected =>
         selected.includes(answerId)
@@ -36,6 +40,11 @@ export class QuestionAnswerBlock {
     this.answersChange.emit(this.selectedAnswers());
   }
 
+  /**
+   * Checks if an answer is currently selected.
+   * @param answerId The ID of the answer to check
+   * @returns True if the answer is selected
+   */
   isSelected(answerId: string): boolean {
     return this.selectedAnswers().includes(answerId);
   }

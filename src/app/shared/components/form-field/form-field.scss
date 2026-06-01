@@ -13,12 +13,23 @@
     font-size: rem(18);
     font-weight: 600;
     color: $color-text-primary;
+
+    @include mobile {
+      width: fit-content;
+      margin-bottom: -30px;
+      font-size: rem(16);
+    }
   }
 
   &__row {
     @include flex-center(row);
     align-items: start;
     gap: 5px;
+
+    @include mobile {
+      flex-direction: column-reverse;
+
+    }
   }
 
   &__optional {
@@ -36,14 +47,29 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 5px;
-    
+
     &:hover {
       background-color: $color-accent-orange-light;
       background-image: url('/assets/img/btn-img/delete-dark.svg');
+    }
+
+    @include mobile {
+      width: fit-content;
+      align-self: end;
     }
   }
 
   &__control {
     @include dark-input;
+
+    @include mobile {
+      padding: 5px 5px 5px 10px;
+    }
+  }
+}
+
+.date-width {
+  @include mobile {
+    min-width: 200px;
   }
 }

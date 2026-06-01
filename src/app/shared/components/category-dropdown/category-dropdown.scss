@@ -2,6 +2,34 @@
 @use '../../../styles/abstracts/mixins' as *;
 @use '../../../styles/abstracts/functions' as *;
 
+:host.category-dropdown--toggle {
+  .category-dropdown__trigger {
+    color: $color-text-dark;
+
+    .category-dropdown__arrow {
+      background-image: url('/assets/img/btn-img/arrow_drop_down_dark_down.svg');
+    }
+
+    &:hover {
+      background-color: $bg-progress-bar;
+
+      .category-dropdown__arrow {
+        background-image: url('/assets/img/btn-img/arrow_drop_down_orange.svg');
+      }
+    }
+
+    &.is-open {
+       background-color: $bg-progress-bar;
+
+      .category-dropdown__arrow {
+        background-image: url('/assets/img/btn-img/arrow_drop_down_dark_down.svg') !important;
+         background-color: transparent;
+      }
+    }
+
+  }
+}
+
 .category-dropdown {
   position: relative;
 
@@ -84,7 +112,7 @@
   &__choosen-option {
     box-sizing: border-box;
     padding: 8px;
-    font-size: rem(16); 
+    font-size: rem(16);
     font-family: $font-body;
     color: $color-accent-orange;
   }

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppHeader } from '../../shared/components/app-header/app-header';
 import { Supabase } from '../../supabase';
@@ -8,14 +8,16 @@ import { QuestionAnswerBlock } from './components/question-answer-block/question
 import { QuestionResults } from "./components/question-results/question-results";
 import { FeedbackToastService } from '../../shared/services/feedback-toast.service';
 import { RealtimeChannel } from '@supabase/supabase-js';
+import { CategoryDropdownComponent } from "../../shared/components/category-dropdown/category-dropdown";
 
 @Component({
   selector: 'app-survey-detail',
-  imports: [AppHeader, QuestionResults, QuestionAnswerBlock],
+  imports: [AppHeader, QuestionResults, QuestionAnswerBlock, CategoryDropdownComponent],
   templateUrl: './survey-detail.html',
   styleUrl: './survey-detail.scss',
 })
 export class SurveyDetailComponent {
+  showFilters = true;
   route = inject(ActivatedRoute);
   dbService = inject(Supabase);
   feedbackToast = inject(FeedbackToastService);
@@ -32,6 +34,15 @@ export class SurveyDetailComponent {
   showError = signal(false);
 
   resetCounter = signal(0);
+
+  showToggleDropdown = window.innerWidth <= 768;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.showToggleDropdown = window.innerWidth <= 768;
+    console.log(window.innerWidth);
+    
+  }
 
   constructor() {
     this.channelVotes = this.dbService.supabase.channel('surveys-live-channel')

@@ -77,6 +77,10 @@ $toast-radius-large: 3.5rem;
   &--error {
     border-color: $color-bg-modal;
   }
+
+  @include mobile {
+    right: 1.25rem;
+  }
 }
 
 .feedback-toast__content {
@@ -105,6 +109,6 @@ $toast-radius-large: 3.5rem;
   cursor: pointer;
 
   &:hover {
-   scale: 1.1;
+    scale: 1.1;
   }
 }

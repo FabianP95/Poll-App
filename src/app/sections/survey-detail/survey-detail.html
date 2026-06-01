@@ -9,7 +9,7 @@
           @if (survey()?.end_date != null) {
           <p>Ends on {{formattedEndDate()}}</p>
           }
-          @if (survey()?.category != null) {
+          @if (survey()?.category != '') {
           <p>Category: {{survey()?.category}}</p>
           }
         </div>
@@ -31,6 +31,9 @@
         <button (click)="submitSurvey()">Complete survey <span></span></button>
       </div>
     </section>
+    @if (showToggleDropdown) {
+    <app-category-dropdown label="See results" mode="toggle" (onToggle)="showFilters = $event" />
+    @if (showFilters) {
     <section class="survey-results">
       <article class="survey-results__container">
         <p class="survey-results__header">Survey results <span>LIVE</span></p>
@@ -46,5 +49,23 @@
         }
       </article>
     </section>
+    }
+    } @else {
+    <section class="survey-results">
+      <article class="survey-results__container">
+        <p class="survey-results__header">Survey results <span>LIVE</span></p>
+        @if (questions()?.some(q => q.answers.some(a => a.votes > 0))) {
+        @for (question of questions(); track $index) {
+        <app-question-results [questionsArray]="question"></app-question-results>
+        }
+        } @else {
+        <div class="survey-results__empty">
+          <p>Results will be shown here after participants complete the survey.</p>
+          <span>There are no answears yet.</span>
+        </div>
+        }
+      </article>
+    </section>
+    }
   </div>
 </div>

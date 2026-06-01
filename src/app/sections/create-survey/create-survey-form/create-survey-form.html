@@ -1,14 +1,17 @@
 <div class="content-wrapper">
+    <div class="show">
+        <app-app-header variant='light' [showButton]="false" />
+    </div>
     <div class="create-form create-form__background">
         <header class="create-form__header">
-            <span class="create-form__badge">Draft</span>
-            <div class="create-form__title">
+            <div>
+                <span class="create-form__badge">Draft</span>
                 <h2 class="create-form__title">Create new survey</h2>
-                <button (click)="cancelCreation()" type="button" class="create-form__cancel-btn">
-                    Cancel
-                    <span btn-secondary__img></span>
-                </button>
             </div>
+            <button (click)="cancelCreation()" type="button" class="create-form__cancel-btn">
+                Cancel
+                <span></span>
+            </button>
         </header>
         <form class="form" id="surveyForm">
             <div class="form__layout">
@@ -36,7 +39,7 @@
                 </button>
             </div>
         </form>
-      
+
         <footer class="form__footer">
             <button form="surveyForm" type="submit" class="form__publish" (click)="onSubmit($event)">
                 Publish <span></span>

@@ -3,7 +3,8 @@
 @use '../../../../styles/abstracts/functions' as *;
 
 .survey-list {
-  padding: $space-xl 0 $space-2xl;
+  padding: 20px;
+  box-sizing: border-box;
 
   &__toolbar {
     @include flex-center(row);
@@ -13,6 +14,12 @@
     justify-content: space-between;
     min-height: 60px;
     align-items: start;
+
+     @include mobile {
+      @include flex-center();
+      align-items: flex-start;
+      gap: 20px;
+    }
   }
 
   &__tabs {

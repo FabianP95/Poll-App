@@ -1,4 +1,4 @@
-import { Component, input, model } from '@angular/core';
+import { Component, HostBinding, input, model, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CategoryDropdownComponent {
   label = input('');
+  toggleLabel = signal('');
+  mode = input<'select' | 'toggle'>('select');
   options = input<string[]>([
     'Team Activities',
     'Health & Wellness',
@@ -18,6 +20,19 @@ export class CategoryDropdownComponent {
     'Technology & Innovation',
   ]);
   value = model('');
-
+  onToggle = output<boolean>();
   isOpen = false;
+
+  @HostBinding('class')
+  get hostClass() {
+    return `category-dropdown--${this.mode()}`;
+  }
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+    if (this.mode() === 'toggle') {
+      this.onToggle.emit(this.isOpen);
+      this.toggleLabel.set(this.isOpen ? 'Close results' : this.label());
+    }
+  }
 }

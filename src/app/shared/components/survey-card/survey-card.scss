@@ -5,6 +5,7 @@
 :host.survey-card--horizontal {
   max-width: 33%;
   flex: 1 1 0;
+  min-width: 270px;
 }
 
 :host.survey-card--list {
@@ -25,7 +26,7 @@
     font-size: rem(16);
     font-weight: 500;
     letter-spacing: 0.5px;
-    margin-bottom: $space-md;
+    margin-bottom: 2rem;
   }
 
   &__title {
@@ -54,6 +55,10 @@
   padding: $space-2xl;
   color: $color-text-dark;
 
+  @include mobile {
+    padding: $space-lg;
+  }
+
   .survey-card__category {
     color: $color-text-dark;
   }
@@ -79,20 +84,25 @@
 
   .survey-card__category {
     color: $color-accent-orange-light;
+
+    @include mobile {
+      margin-bottom: $space-md;
+    }
+
   }
 
   .survey-card__title {
     color: $color-text-primary;
   }
 
-  .survey-card__badge {    
-      margin-left: auto;
-    }
+  .survey-card__badge {
+    margin-left: auto;
+  }
 
   &:hover {
     background-color: $color-bg-light-hover;
 
-    .survey-card__badge {    
+    .survey-card__badge {
       background-color: $color-accent-orange;
     }
   }

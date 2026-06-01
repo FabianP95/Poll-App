@@ -2,24 +2,52 @@
 @use '../../../styles/abstracts/mixins' as *;
 @use '../../../styles/abstracts/functions' as *;
 
+.show {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+}
+
 .create-form {
   display: flex;
   flex-direction: column;
   min-height: 90vh;
   height: fit-content;
   margin: 20px 10px;
-  width: 100%;
+
   padding: 50px;
   box-sizing: border-box;
 
+  @include mobile {
+    margin: 20px 0;
+    padding: 50px 25px 30px 20px;
+  }
+
   &__background {
-    @include container-rounded-top-right($color-bg-dark, 150px)
+    @include container-rounded-top-right($color-bg-dark, 150px);
+
+    @include mobile {
+      @include container-rounded-top-right($color-bg-dark, 115px)
+    }
   }
 
   &__header {
-    @include flex-center();
-    align-items: flex-start;
-    margin-bottom: 30px
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: space-between;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    @include mobile {
+      align-items: flex-start;
+    }
   }
 
   &__badge {
@@ -37,12 +65,22 @@
     width: 100%;
 
     >h2 {
-      font-size: rem(52);
+      font-size: rem(56);
     }
+
+
   }
 
-  &__cancel-btn{
-    @include btn-secondary('/assets/img/btn-img/close.png')
+  &__cancel-btn {
+    @include btn-secondary('/assets/img/btn-img/close.png');
+
+    @include mobile {
+      font-size: 0;
+
+      >span {
+        margin-left: 0;
+      }
+    }
   }
 }
 
@@ -50,10 +88,29 @@
   @include container-rounded-top-right($color-bg-light, 100px);
   padding: $space-2xl;
 
+  @include tablet {
+    padding: 50px 25px 30px 10px;
+  }
+
+  @include mobile {
+    padding: 50px 25px 30px 10px;
+  }
+
   &__layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $space-2xl;
+
+    @include tablet {
+       gap: $space-md;
+    }
+
+    @include mobile {
+      grid-template-columns: auto;
+      padding: 4px;
+      box-sizing: border-box;
+      gap: $space-md;
+    }
   }
 
   &__row {
@@ -61,18 +118,31 @@
     justify-content: space-between;
     align-items: flex-start;
 
+    @include mobile {
+      flex-direction: column-reverse;
+      gap: 20px;
+
+    }
   }
 
   &__add-question {
     @include btn-secondary('/assets/img/btn-img/add_circle_white.svg');
     width: fit-content;
     height: fit-content;
+
+    @include mobile {
+      justify-self: center;
+    }
   }
 
   &__footer {
     display: flex;
     justify-content: flex-end;
     padding-top: $space-lg;
+
+    @include mobile {
+      justify-content: center;
+    }
   }
 
   &__publish {

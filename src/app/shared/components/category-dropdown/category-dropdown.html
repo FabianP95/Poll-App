@@ -1,20 +1,21 @@
 <div class="category-dropdown">
-  <button type="button" class="category-dropdown__trigger" [class.is-open]="isOpen" (click)="isOpen = !isOpen">
-    <span>{{ label() }}</span>
+  <button type="button" class="category-dropdown__trigger" [class.is-open]="isOpen" (click)="toggle()">
+    <span><span>{{ toggleLabel() || label() }}</span></span>
     <span class="category-dropdown__arrow"></span>
   </button>
 
-  @if (isOpen) {
-  <div class="category-dropdown__menu">
-    @for (option of options(); track option) {
-    <div class="category-dropdown__option" [class.is-selected]="value() === option"
-      (click)="value.set(option); isOpen = false">
-      {{ option }}
+  @if (isOpen && mode() === 'select') {
+    <div class="category-dropdown__menu">
+      @for (option of options(); track option) {
+        <div class="category-dropdown__option" [class.is-selected]="value() === option"
+          (click)="value.set(option); isOpen = false">
+          {{ option }}
+        </div>
+      }
     </div>
-    }
-  </div>
   }
-  @if (value() != ""){
-  <span class="category-dropdown__choosen-option">{{value()}}</span>
-  } 
+
+  @if (value() != '' && mode() === 'select') {
+    <span class="category-dropdown__choosen-option">{{ value() }}</span>
+  }
 </div>

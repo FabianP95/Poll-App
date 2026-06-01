@@ -12,6 +12,13 @@
   grid-template-columns: 2fr 1fr;
   gap: 16px;
   margin-top: 50px;
+
+  @include mobile {
+    display: block;
+    gap: 0;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 }
 
 .survey-fill-out {
@@ -19,6 +26,11 @@
   @include container-rounded-top-right($color-bg-survey-fill-out, 150px);
   height: fit-content;
   padding: 50px;
+  margin-bottom: 20px;
+
+  @include mobile {
+    padding: 50px 15px 20px 5px;
+  }
 
   &__header {
     @include flex-center();
@@ -52,6 +64,13 @@
     justify-content: space-between;
     margin-top: 20px;
     align-items: center;
+    
+
+    @include mobile {
+      height: 110px;
+      flex-direction: column;
+      justify-content: end;
+    }
 
     >p {
       color: $color-text-dark;
@@ -60,6 +79,12 @@
       padding: 4px;
       border-radius: $radius-sm;
       text-decoration: underline;
+
+      @include mobile {
+      
+        font-size: rem(16);
+      }
+
     }
 
     >button {
@@ -74,6 +99,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
+
+  @include mobile {
+    grid-template-columns: auto;
+  }
 }
 
 .survey-results {

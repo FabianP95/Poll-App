@@ -8,6 +8,7 @@ import { Question } from '../../../core/interfaces/survey.interfaces';
 import { Answer } from '../../../core/interfaces/survey.interfaces';
 import { Supabase } from '../../../supabase';
 import { FeedbackToastService } from '../../../shared/services/feedback-toast.service';
+import { AppHeader } from "../../../shared/components/app-header/app-header";
 
 
 
@@ -27,7 +28,7 @@ function createEmptyQuestion(index: number): Question {
 
 @Component({
   selector: 'app-create-survey-form',
-  imports: [ReactiveFormsModule, FormFieldComponent, CategoryDropdownComponent, QuestionBlock],
+  imports: [ReactiveFormsModule, FormFieldComponent, CategoryDropdownComponent, QuestionBlock, AppHeader],
   templateUrl: './create-survey-form.html',
   styleUrl: './create-survey-form.scss',
 })

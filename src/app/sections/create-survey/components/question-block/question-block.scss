@@ -10,6 +10,10 @@
   margin: 0;
   width: 90%;
 
+  @include mobile {
+    width: 100%;
+  }
+
   &__header {
     @include flex-center(row);
     justify-content: space-between;
@@ -62,6 +66,10 @@
     color: $color-text-primary;
     font-family: $font-body;
     font-size: rem(18);
+
+    @include mobile {
+      font-size: rem(16);
+    }
   }
 
   &__multiple {
@@ -120,6 +128,10 @@
 
   &__add-answer {
     @include btn-tertiary();
+
+    @include mobile {
+      justify-self: center;
+    }
   }
 
   &__add-icon {

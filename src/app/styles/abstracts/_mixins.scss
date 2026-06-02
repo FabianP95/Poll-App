@@ -89,7 +89,7 @@
   padding: $space-lg;
 }
 
-@mixin btn-primary($icon: '/assets/img/btn-img/add_circle.svg', $active-icon: '/assets/img/btn-img/check.svg') {
+@mixin btn-primary($icon: '../../../../public/assets/img/btn-img/add_circle.svg', $active-icon: '../../../../public/assets/img/btn-img/check.svg') {
   @include flex-center(row);
   justify-content: center;
   padding: $space-sm $space-lg;
@@ -177,7 +177,7 @@
   border-radius: 5px $radius 5px 5px;
 }
 
-@mixin btn-tertiary($icon: '/assets/img/btn-img/add_circle_white.svg') {
+@mixin btn-tertiary($icon: '../../../../public/assets/img/btn-img/add_circle_white.svg') {
 
   @include flex-center(row);
   gap: rem(8);

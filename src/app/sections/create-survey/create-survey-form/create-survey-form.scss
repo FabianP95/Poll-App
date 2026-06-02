@@ -72,7 +72,7 @@
   }
 
   &__cancel-btn {
-    @include btn-secondary('/assets/img/btn-img/close.png');
+    @include btn-secondary('../../../../public/assets/img/btn-img/close.png');
 
     @include mobile {
       font-size: 0;
@@ -126,7 +126,7 @@
   }
 
   &__add-question {
-    @include btn-secondary('/assets/img/btn-img/add_circle_white.svg');
+    @include btn-secondary('../../../../public/assets/img/btn-img/add_circle_white.svg');
     width: fit-content;
     height: fit-content;
 
@@ -146,6 +146,6 @@
   }
 
   &__publish {
-    @include btn-primary('/assets/img/btn-img/check.svg')
+    @include btn-primary('../../../../public/assets/img/btn-img/check.svg')
   }
 }

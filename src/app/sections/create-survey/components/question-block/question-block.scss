@@ -33,7 +33,7 @@
     background: transparent;
     cursor: pointer;
     padding: 15px;
-    background-image: url('/assets/img/btn-img/delete.svg');
+    background-image: url('../../../../../../public/assets/img/btn-img/delete.svg');
     background-size: 20px 20px;
     background-position: center;
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@
 
     &:hover {
       background-color: $color-accent-orange-light;
-      background-image: url('/assets/img/btn-img/delete-dark.svg');
+      background-image: url('../../../../../../public/assets/img/btn-img/delete-dark.svg');
     }
   }
 
@@ -104,7 +104,7 @@
     border-color: $color-accent-orange;
     width: 18px;
     height: 18px;
-    background-image: url('/assets/img/btn-img/check.svg');
+    background-image: url('../../../../../../public/assets/img/btn-img/check.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 11px;

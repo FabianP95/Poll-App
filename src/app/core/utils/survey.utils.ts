@@ -69,6 +69,6 @@ export function formatDate(date: Date | null): string {
  * @returns Array of surveys in the selected category
  */
 export function filterSurveysByCategory(surveys: Survey[], category: string): Survey[] {
-  if (!category) return surveys;
+  if (!category || category === 'Show all') return surveys;
   return surveys.filter((s) => s.category === category);
 }

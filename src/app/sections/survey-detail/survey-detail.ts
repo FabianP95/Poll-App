@@ -27,6 +27,7 @@ export class SurveyDetailComponent {
   loading = signal(true);
   loadedQuestions = signal(true);
   loadedAnswers = signal(true);
+  surveySubmitted = signal(false);
 
   votes = signal(null);
   selectedVotes = signal<{ questionId: string; answerIds: string[] }[]>([]);
@@ -173,22 +174,23 @@ export class SurveyDetailComponent {
     this.showError.set(false);
     this.dbService.setVotes(this.survey()!.id, this.selectedVotes());
     this.selectedVotes.set([]);
+    this.surveySubmitted.set(true);
     this.resetCounter.update(c => c + 1);
   }
 
-   /**
-   * formats the enddate of the survey
-   * @returns formatted enddate
-   */
+  /**
+  * formats the enddate of the survey
+  * @returns formatted enddate
+  */
   formattedEndDate(): string {
     const current = this.survey();
     if (!current) return '';
     return formatDate(current.end_date);
   }
 
-   /**
-   * removes the channel listening for changes on destroy
-   */
+  /**
+  * removes the channel listening for changes on destroy
+  */
   ngOnDestroy() {
     this.dbService.supabase.removeChannel(this.channelVotes)
   }

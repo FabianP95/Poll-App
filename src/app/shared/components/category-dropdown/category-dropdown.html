@@ -15,7 +15,7 @@
     </div>
   }
 
-  @if (value() != '' && mode() === 'select') {
+  @if (value() != '' && value() != 'Show all' && mode() === 'select') {
     <span class="category-dropdown__choosen-option">{{ value() }}</span>
   }
 </div>

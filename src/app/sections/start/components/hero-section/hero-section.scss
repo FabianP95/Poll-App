@@ -5,7 +5,7 @@
 .hero {
     display: grid;
     height: calc(90vh - 100px);
-    max-height: 1600px;
+    max-height: 1000px;
     grid-auto-columns: 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:

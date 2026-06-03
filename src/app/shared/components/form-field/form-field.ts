@@ -14,6 +14,7 @@ export class FormFieldComponent {
   showDelete = input(false);
   type = input<'input' | 'textarea' | 'date'>('input');
   value = model('');
+  today = new Date().toISOString().split('T')[0];
 
   /**
    * Clears the form field value.

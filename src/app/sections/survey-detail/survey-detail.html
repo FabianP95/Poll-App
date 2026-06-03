@@ -28,7 +28,7 @@
         @if (showError()) {
         <p>Please answer all questions before submitting.</p>
         }
-        <button (click)="submitSurvey()">Complete survey <span></span></button>
+        <button (click)="submitSurvey()" [disabled]="surveySubmitted()">Complete survey <span></span></button>
       </div>
     </section>
     @if (showToggleDropdown) {

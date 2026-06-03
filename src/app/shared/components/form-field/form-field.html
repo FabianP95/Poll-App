@@ -9,7 +9,7 @@
     @if (type() === 'textarea') {
     <textarea class="form-field__control" [placeholder]="placeholder()" [(ngModel)]="value" rows="4"></textarea>
     } @else if (type() === 'date') {
-    <input class="form-field__control date-width" type="date" [(ngModel)]="value" />
+    <input class="form-field__control date-width" type="date" [(ngModel)]="value" [min]="today"/>
     } @else {
     <input class="form-field__control" type="text" [placeholder]="placeholder()" [(ngModel)]="value" />
     }

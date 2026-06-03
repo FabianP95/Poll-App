@@ -12,6 +12,7 @@ export class CategoryDropdownComponent {
   toggleLabel = signal('');
   mode = input<'select' | 'toggle'>('select');
   options = input<string[]>([
+    'Show all',
     'Team Activities',
     'Health & Wellness',
     'Gaming & Entertainment',

@@ -16,7 +16,7 @@
   min-height: 90vh;
   height: fit-content;
   margin: 20px 10px;
-
+  justify-content: center;
   padding: 50px;
   box-sizing: border-box;
 
@@ -63,11 +63,12 @@
     @include flex-center(row);
     justify-content: space-between;
     width: 100%;
+    font-size: rem(56);
 
-    >h2 {
-      font-size: rem(56);
+
+    @include mobile {
+      font-size: rem(50);
     }
-
 
   }
 
@@ -102,7 +103,7 @@
     gap: $space-2xl;
 
     @include tablet {
-       gap: $space-md;
+      gap: $space-md;
     }
 
     @include mobile {

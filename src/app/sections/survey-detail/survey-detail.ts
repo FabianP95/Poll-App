@@ -188,6 +188,15 @@ export class SurveyDetailComponent {
     return formatDate(current.end_date);
   }
 
+
+  /**
+  * checks the selected answer/answers per question
+  * @returns an array of answer ids
+  */
+  getSelectedForQuestion(questionId: string): string[] {
+    return this.selectedVotes().find(v => v.questionId === questionId)?.answerIds ?? [];
+  }
+
   /**
   * removes the channel listening for changes on destroy
   */

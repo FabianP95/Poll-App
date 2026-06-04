@@ -7,10 +7,10 @@
     <div class="question-results__answers">
         <p>{{answer.letter}}.</p>
         <div class="question-results__answer-bar">
-            <div class="question-results__answer-bar-fill" [style.width.%]="(answer.votes / totalVotes()) * 100">
+            <div class="question-results__answer-bar-fill" [style.width.%]="(previewVotes(answer) / totalVotes()) * 100">
             </div>
         </div>
-        <div class="question-results__answer-percentage">  {{ (answer.votes / totalVotes()) * 100 | number:'1.0-0' }}%</div>
+        <div class="question-results__answer-percentage">  {{ (previewVotes(answer) / totalVotes()) * 100 | number:'1.0-0' }}%</div>
     </div>
     }
 </div>

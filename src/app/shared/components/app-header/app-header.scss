@@ -7,7 +7,7 @@
   max-width: 1440px;
   width: 100%;
   justify-content: space-between;
-  padding: $space-md $space-lg;
+  padding: $space-md 3.5rem;
   min-height: $header-height;
   box-sizing: border-box;
 
@@ -47,6 +47,8 @@
 }
 
 :host.app-header--light .app-header {
+  padding: $space-md $space-lg;
+
   &__title {
     color: $color-text-dark;
   }

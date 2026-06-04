@@ -39,7 +39,7 @@
         <p class="survey-results__header">Survey results <span>LIVE</span></p>
         @if (questions()?.some(q => q.answers.some(a => a.votes > 0))) {
         @for (question of questions(); track $index) {
-        <app-question-results [questionsArray]="question"></app-question-results>
+        <app-question-results [questionsArray]="question"  [selectedAnswerIds]="getSelectedForQuestion(question.id)"></app-question-results>
         }
         } @else {
         <div class="survey-results__empty">
@@ -56,7 +56,7 @@
         <p class="survey-results__header">Survey results <span>LIVE</span></p>
         @if (questions()?.some(q => q.answers.some(a => a.votes > 0))) {
         @for (question of questions(); track $index) {
-        <app-question-results [questionsArray]="question"></app-question-results>
+        <app-question-results [questionsArray]="question"  [selectedAnswerIds]="getSelectedForQuestion(question.id)"></app-question-results>
         }
         } @else {
         <div class="survey-results__empty">

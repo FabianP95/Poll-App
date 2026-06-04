@@ -37,12 +37,22 @@
   margin: $margin-wrapper;
 }
 
-@mixin hide-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+@mixin custom-scrollbar($color: $color-accent-orange, $color-hover: $color-accent-orange-light, $size: 6px) {
+  scrollbar-width: thin;
+  scrollbar-color: $color transparent;
 
   &::-webkit-scrollbar {
-    display: none;
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color;
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-hover;
   }
 }
 

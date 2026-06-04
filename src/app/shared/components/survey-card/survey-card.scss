@@ -61,6 +61,12 @@
 
   .survey-card__category {
     color: $color-text-dark;
+    
+
+    @include mobile {
+      margin-top: $space-md;
+
+    }
   }
 
   .survey-card__title {
@@ -87,6 +93,7 @@
 
     @include mobile {
       margin-bottom: $space-md;
+
     }
 
   }

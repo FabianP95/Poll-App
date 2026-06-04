@@ -18,7 +18,7 @@ export class StartComponent {
 
     surveys = signal<Survey[]>([]);
 
-    endingSoonSurveys = computed(() => getEndingSoonSurveys(this.surveys(), 3));
+    endingSoonSurveys = computed(() => getEndingSoonSurveys(this.surveys(), 4));
 
     constructor() {
         this.loadSurveys();

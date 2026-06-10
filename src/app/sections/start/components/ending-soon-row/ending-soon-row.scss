@@ -39,7 +39,7 @@
     justify-content: flex-start;
     gap: 2rem;
     width: 100%;
-    overflow-x: auto;
+    overflow-x: scroll;
     padding-bottom: $space-sm;
     @include custom-scrollbar();
   }
